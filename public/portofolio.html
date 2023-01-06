@@ -5,16 +5,21 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="/css/color-palette.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/star.css">
 
 </head>
 <body>
-    <svg width="100" height="100">
-        <path d="M 50 0 C 50 40 30 50 0 50 C 30 50 50 70 50 100 C 50 70 70 50 100 50 C 70 50 50 40 50 0"
-              fill="white"></path>
-    </svg>
-<svg>
-    <path d="M 50 0 C 50 42 42 50 0 50 C 42 50 50 58 50 100 C 50 58 58 50 100 50 C 58 50 50 42 50 0"
-          fill="white"></path>
+<svg class="star_effect_svg">
+    <defs>
+        <radialGradient id="rad_grad_4_point_star">
+            <stop offset="0%" stop-color="rgba(255,255,255,1)" />
+            <stop offset="70%" stop-color="rgba(255,255,255,0)" />
+        </radialGradient>
+    </defs>
+    <g class="star_container">
+        <path class="star_4_point_path"></path>
+    </g>
 </svg>
 </body>
 </html>
