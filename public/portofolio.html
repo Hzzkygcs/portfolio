@@ -8,18 +8,60 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/star.css">
 
+    <script src="/js/lib/parallax.min.js"></script>
+    <script src="/js/lib/iscroll.js"></script>
+    <script src="/js/lib/jquery-3.6.3.min.js"></script>
+    <script src="/js/lib/hammer.min.js"></script>
+
+    <script src="/js/util.js"></script>
+    <script src="/js/ScrollParallax.js"></script>
+    <script src="/js/main.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
-<svg class="star_effect_svg">
-    <defs>
-        <radialGradient id="rad_grad_4_point_star">
-            <stop offset="0%" stop-color="rgba(255,255,255,1)" />
-            <stop offset="70%" stop-color="rgba(255,255,255,0)" />
-        </radialGradient>
-    </defs>
-    <g class="star_container">
-        <path class="star_4_point_path"></path>
-    </g>
-</svg>
+<div class="stack full-height">
+    <svg class="star_effect_svg scene stacked">
+
+    </svg>
+    <template id="four-point-star">
+        <g class="outer">
+            <g class="inner star_container">
+                <path class="four-point-star-path"></path>
+            </g>
+        </g>
+    </template>
+    <template id="normal-star">
+        <g class="outer">
+            <g class="inner star_container">
+                <circle class="normal-star-path"></circle>
+            </g>
+        </g>
+    </template>
+
+
+
+    <div class="content stacked" style="z-index: 10; color: white;">
+        <h1>
+            Hello 1
+        </h1>
+        <h1>
+            Hello 2
+        </h1>
+        <h1>
+            Hello 3
+        </h1>
+        <h1>
+            Hello 4
+        </h1>
+        <h1>
+            Hello 5
+        </h1>
+        <h1>
+            Hello 6
+        </h1>
+    </div>
+</div>
+
 </body>
 </html>

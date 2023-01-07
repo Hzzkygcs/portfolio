@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static('public'));
 
 app.get("/", (req, res) => {
-    res.redirect("/portofolio.html");
+    res.send("Hello world");
 });
 
 app.listen(8080, () => console.log("Listening"));

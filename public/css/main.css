@@ -7,6 +7,20 @@ body {
     /*background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);*/
     background: linear-gradient(var(--main-background-grad-start) 0%, var(--main-background-grad-end) 100%);
     color: var(--main-background-grad-start);
-    height: 100vh;
+    height: 3000px;
+}
 
+.stack{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+
+.stacked{
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.full-height {
+    height: 100%;
 }

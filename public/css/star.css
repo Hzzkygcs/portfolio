@@ -12,25 +12,31 @@
 }
 
 .star_container{
-    transform: translate(100px, 50px);
 }
 
-.star_4_point_path {
-    transform: scale(200%, 200%);
+.normal-star-path{
+    fill: rgba(255, 255, 255, 1);
+}
+
+.four-point-star-path {
     filter: drop-shadow(0px 0px 5px rgba(240, 240, 240, 1));
 
     d: var(--4-point-star-narrow-path);
-    fill: url(#rad_grad_4_point_star);
-    animation-name: star_4_point_big_and_narrow_animation;
+    animation-name: four_point_star_grow_shrink_animation;
     animation-duration: 5s;
     animation-timing-function: ease-in;
     animation-fill-mode: forwards;
     animation-iteration-count: infinite;
 }
 
+.fixed-pos-for-mobile {
+    position: fixed;
+    left: 0;
+    top: 0;
+}
 
-@keyframes star_4_point_big_and_narrow_animation {
 
+@keyframes four_point_star_grow_shrink_animation {
     0% {
         d: var(--4-point-star-narrow-path);
     }
