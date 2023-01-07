@@ -21,42 +21,41 @@ function translate3d(x, y, z=0){
     return `translate3d(${x}px, ${y}px, ${z}px)`;
 }
 
-function scrollParallax(sceneElement){
-    sceneElement = $(sceneElement);
-
-    const parallaxElements = sceneElement.children("*[data-depth]");
-    parallaxElements.addClass("fixed-pos-for-mobile");
 
 
-    function updateEvent(currYScroll){
-        // const currYScroll = $(window).scrollTop();
-        console.log("Scroll " + currYScroll);
+function simulateParallaxMouseMove(parallaxInstance, clientX, clientY){
+    console.log("simulate", clientX, clientY);
+    const event = $.Event('mousemove');
 
-        for (let element of parallaxElements) {
-            element = $(element);
+    event.clientX = clientX;
+    event.clientY = clientY;
 
-            const dataDepth = element.attr("data-depth");
-            const translateY = currYScroll * (1 - 2*dataDepth);
-            setTranslate3d(element, 0, translateY);
+    // trigger event
+    parallaxInstance.onMouseMove(event);
+}
 
-        }
-    }
+function scrollParallax(parallaxInstance){
+    const hammer = new Hammer(document.getElementsByTagName("body")[0], {
+        touchAction: 'auto',
+    });
+    hammer.get("pan").set({ direction: Hammer.DIRECTION_ALL, threshold: 0 });
+    hammer.get('swipe').set({ enable: false });
 
-    const hammer = new Hammer(document.getElementsByTagName("body")[0]);
-    hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL, threshold: 0 });
 
-    let prevScrollY = 0;
+
+
+    let scrollX = 0;
+    let scrollY = 0;
     hammer.on('panmove', (e) => {
-        const currScrollY = Math.max(0, prevScrollY - e.deltaY);
-        console.log();
-        updateEvent(-currScrollY)
+        console.log(e.isFinal);
+        scrollX -= e.deltaX*4;
+        scrollY -= e.deltaY*4;
 
-        // $(document).scrollTop(currScrollY);
-        setTranslate3d($(".content"), 0, -currScrollY);
+        simulateParallaxMouseMove(parallaxInstance, scrollX, scrollY);
     });
     hammer.on('panend', (e) => {
-        prevScrollY -= e.deltaY;
-        prevScrollY = Math.max(0, prevScrollY);
+        console.log("pan end");
+        simulateParallaxMouseMove(parallaxInstance, scrollX, scrollY);
     });
 
 
