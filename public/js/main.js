@@ -75,9 +75,9 @@ function createRandomNormalStar(z, scene){
     // let's say z is the star's distance
     const minZ = MIN_Z;
     const maxZ = MAX_Z;
-    let dataDepthForMinZ = 0.3;
+    let dataDepthForMinZ = 0.25;
     if (mobileAndTabletCheck()){
-        dataDepthForMinZ = 0.6;
+        dataDepthForMinZ = 0.5;
     }
     const sizeForMinZ = 2.5;
     console.assert(minZ <= z && z <= maxZ);
@@ -87,7 +87,8 @@ function createRandomNormalStar(z, scene){
     const y = getRandomInt(0, maxY);
 
     const size = sizeForMinZ * (minZ / z);
-    const dataDepth = dataDepthForMinZ * (minZ / z) ** 1.5;
+    let dataDepth = dataDepthForMinZ * (minZ / z) ** 1.5 ;
+    dataDepth = dataDepth + getRandomInt(-100, 100) / 10_000;
 
     createNewNormalStar(x, y, dataDepth, size, "bisque", scene);
 }
@@ -98,6 +99,8 @@ $(document).ready(() => {
     const scene = document.getElementsByClassName('scene')[0];
 
     let starsCount = Math.ceil(documentArea / 4500);  // exclude special stars
+    starsCount = Math.min(1200, starsCount);  // mencegah terlalu banyak bintang nanti jadi ngelag
+
     console.log(starsCount);
     if (mobileAndTabletCheck())
         starsCount = 200;
