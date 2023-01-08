@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+
+
+    <link rel="stylesheet" href="/dist/css/main.css">
     <link rel="stylesheet" href="/css/color-palette.css">
-    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/star.css">
 
     <script src="/js/lib/parallax-modified.js"></script>
@@ -13,9 +15,14 @@
     <script src="/js/lib/jquery-3.6.3.min.js"></script>
     <script src="/js/lib/hammer.min.js"></script>
 
+    <script src="/js/deferred.js"></script>
     <script src="/js/util.js"></script>
     <script src="/js/ScrollParallax.js"></script>
     <script src="/js/main.js"></script>
+
+
+    <link rel="stylesheet" href="/modules/typing-animation/typing-animation.css">
+    <script src="/modules/typing-animation/typing-animation.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
@@ -40,26 +47,35 @@
     </template>
 
 
-
     <div class="content stacked" style="z-index: 10; color: white;">
-        <h1>
-            Hello 1
-        </h1>
-        <h1>
-            Hello 2
-        </h1>
-        <h1>
-            Hello 3
-        </h1>
-        <h1>
-            Hello 4
-        </h1>
-        <h1>
-            Hello 5
-        </h1>
-        <h1>
-            Hello 6
-        </h1>
+        <div class="horizontally-centerize p-12">
+            <h1 class="text-7xl m-5">
+                Hello!
+            </h1>
+            <h2 class="text-5xl">
+                <span>
+                    I'm Nuel, and I'm
+                    <span class="js-not-loaded">
+                        a<span id="a-an" class="hidden-on-js-not-loaded">n</span>
+                    </span>
+                </span>
+                <span class="typing-animation js-not-loaded font-tosca">
+                    <span data-order="1" class="default"
+                          ontypingthis="hide_a_an()">
+                        software engineer
+                    </span>
+                    <span data-order="2" ontypingthis="hide_a_an()">
+                        web developer
+                    </span>
+                    <span data-order="3" ontypingthis="show_a_an();">
+                        University of Indonesia student
+                    </span>
+                    <span data-order="4" ontypingthis="show_a_an();">
+                        IT enthusiast
+                    </span>
+                </span>
+            </h2>
+        </div>
     </div>
 </div>
 

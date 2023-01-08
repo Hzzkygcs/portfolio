@@ -5,4 +5,15 @@
     --main-div: #005282;
     --main-orange: #E04D01;
     --light-orange: #FF7700;
+
+    --tosca: #0fa4c2;
 }
+
+.font-tosca {
+    color: var(--tosca);
+}
+
+.font-light-orange {
+    color: var(--light-orange);
+}
+

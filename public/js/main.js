@@ -75,7 +75,7 @@ function createRandomNormalStar(z, scene){
     // let's say z is the star's distance
     const minZ = MIN_Z;
     const maxZ = MAX_Z;
-    let dataDepthForMinZ = 0.25;
+    let dataDepthForMinZ = 0.4;
     if (mobileAndTabletCheck()){
         dataDepthForMinZ = 0.5;
     }
@@ -88,7 +88,7 @@ function createRandomNormalStar(z, scene){
 
     const size = sizeForMinZ * (minZ / z);
     let dataDepth = dataDepthForMinZ * (minZ / z) ** 1.5 ;
-    dataDepth = dataDepth + getRandomInt(-100, 100) / 10_000;
+    dataDepth = dataDepth + getRandomInt(-150, 150) / 10_000;
 
     createNewNormalStar(x, y, dataDepth, size, "bisque", scene);
 }

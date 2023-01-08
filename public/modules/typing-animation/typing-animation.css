@@ -1,0 +1,13 @@
+
+
+.typing-animation.js-not-loaded > *{
+    display: none;
+}
+
+.typing-animation.js-not-loaded > .default {
+    display: inline;
+}
+
+.js-not-loaded .hidden-on-js-not-loaded {
+    display: none;
+}

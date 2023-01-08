@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body, html{
     margin: 0;
     padding: 0;
@@ -19,6 +23,12 @@ body {
 .stacked{
     grid-row: 1;
     grid-column: 1;
+}
+
+.horizontally-centerize {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .full-height {
