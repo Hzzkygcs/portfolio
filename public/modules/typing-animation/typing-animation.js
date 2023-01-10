@@ -14,11 +14,17 @@ $(document).ready(() => {
 });
 
 
-function hide_a_an(){
-    $('#a-an').fadeOut(500);
+function convert_an_to_a(){
+    return new Promise((res, rej) => {
+        $('#a-an').fadeOut(800);
+        res();
+    });
 }
-function show_a_an(){
-    $('#a-an').fadeIn(500);
+function convert_a_to_an(){
+    return new Promise((res, rej) => {
+        $('#a-an').fadeIn(800);
+        res();
+    });
 }
 
 

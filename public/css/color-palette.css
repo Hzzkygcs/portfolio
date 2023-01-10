@@ -9,11 +9,3 @@
     --tosca: #0fa4c2;
 }
 
-.font-tosca {
-    color: var(--tosca);
-}
-
-.font-light-orange {
-    color: var(--light-orange);
-}
-
