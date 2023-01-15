@@ -16,10 +16,10 @@ class ModuleMetadataManager {
     }
 
     getManager(element) {
-        return new ElementMetadataManager(this.moduleId);
+        return new ElementMetadataManager(element);
     }
 
-    _getMetadatakeyword(){
+    _getMetadatakeyword(metadataKeyword){
         return `${this.moduleId}-${metadataKeyword}`;
     }
 

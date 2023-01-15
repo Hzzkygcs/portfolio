@@ -5,7 +5,7 @@
     <title>Title</title>
 
 
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/dist/css/main.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/color-palette.css">
@@ -19,6 +19,11 @@
     <script src="/js/deferred.js"></script>
     <script src="/js/util.js"></script>
     <script src="/js/ScrollParallax.js"></script>
+
+    <script src="/modules/element-metadata/element-metadata.js"></script>
+    <script src="/modules/on-entering-screen-event/event-handler.js"></script>
+
+    <script src="/js/stars-init.js"></script>
     <script src="/js/main.js"></script>
 
 
@@ -48,34 +53,70 @@
     </template>
 
 
-    <div class="content stacked" style="z-index: 10; color: white;">
-        <div class="horizontally-centerize p-12">
-            <h1 class="text-7xl m-5 font-white">
-                Hello!
-            </h1>
-            <h2 class="text-5xl">
-                <span class="font-white">
-                    I'm Nuel, and I'm
-                    <span class="js-not-loaded">
-                        a<span id="a-an" class="hidden-on-js-not-loaded">n</span>
+    <div class="content stacked p-0" style="z-index: 10; color: white;">
+        <div class="content-center">
+            <div class="h-screen flex flex-col justify-center">
+                <h1 class="text-7xl m-5 font-white text-center">
+                    Hello!
+                </h1>
+                <h2 class="text-4xl sm:text-5xl text-center inline-block"
+                    style="min-height: 8.5rem;">
+                    <span class="font-white stable-height-for-animating-text">
+                        I'm Nuel,
+
+                        and I'm
+
+                        <span class="js-not-loaded">
+                            a<span id="a-an" class="hidden-on-js-not-loaded">n</span>
+                        </span>
+                        <br class="inline lg:hidden">
                     </span>
-                </span>
-                <span class="typing-animation js-not-loaded font-tosca">
-                    <span data-order="1" class="default"
-                          ontypingthis="convert_an_to_a()">
-                        software engineer
+                    <span class="typing-animation js-not-loaded font-tosca inline-block">
+                        <span data-order="1" class="default"
+                              ontypingthis="convert_an_to_a()">
+                            software engineer
+                        </span>
+                        <span data-order="2" ontypingthis="convert_an_to_a()">
+                            web developer
+                        </span>
+                        <span class="max-sm:text-4xl" data-order="3" ontypingthis="convert_an_to_a();">
+                            student of Universitas Indonesia
+                        </span>
+
+                        <span class="excluded-from-animation inline-block">
+                            <!--
+                            dummy element to keep the text position stable
+                            across whole phase of the animation
+                            -->
+                        </span>
                     </span>
-                    <span data-order="2" ontypingthis="convert_an_to_a()">
-                        web developer
-                    </span>
-                    <span data-order="3" ontypingthis="convert_an_to_a();">
-                        student of Universitas Indonesia
-                    </span>
-                    <span data-order="4" ontypingthis="convert_a_to_an();">
-                        IT enthusiast
-                    </span>
-                </span>
-            </h2>
+                </h2>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <h2 id="about-me"
+                    class="text-4xl sm:text-5xl text-center inline-block">
+                    About Me
+                </h2>
+                <img class="m-10
+                            w-36 sm:w-48
+                            h-36 sm:h-48
+                            rounded-full border-2
+                            shadow-1px-1px shadow-white"
+                     src="img/foto.png" alt="my photo">
+
+                <p class="m-5 mt-0 max-w-3xl
+                          text-justify sm:text-center">
+                    Hello! I'm Immanuel, and you can call me Nuel. 😃
+                    I'm a computer science student at Universitas Indonesia.
+                    I enjoy programming and creating software, especially ones that come from my ideas or ones
+                    that may solve problems around me. I'm currently looking for challenges!
+                    So if you got any challenges for me in developing some websites, mobile apps, or desktop apps,
+                    please feel free to contact me! 😁
+                </p>
+
+            </div>
+
         </div>
     </div>
 </div>

@@ -29,23 +29,30 @@ let watchedElements = [];
 $(document).ready(() => {
     let elementsToBeWatched;
 
-    elementsToBeWatched = $(`*[${ON_ENTIRE_VISIBILITY_CHANGED}]`);
-    watchedElements = watchedElements.concat(elementsToBeWatched);
+
+    elementsToBeWatched = document.querySelectorAll(`*[${ON_PARTIAL_VISIBIITY_CHANGED}]`);
     for (const element of elementsToBeWatched) {
+        watchedElements.push(element);
+
+        const attributeHandlerCode = element.getAttribute(ON_PARTIAL_VISIBIITY_CHANGED);
+        element.addEventListener(PARTIAL_VISIBILITY_CHANGED, (event) => {
+            eval(attributeHandlerCode);
+        });
+    }
+
+    elementsToBeWatched = document.querySelectorAll(`*[${ON_ENTIRE_VISIBILITY_CHANGED}]`);
+    for (const element of elementsToBeWatched) {
+        watchedElements.push(element);
+
         const attributeHandlerCode = element.getAttribute(ON_ENTIRE_VISIBILITY_CHANGED);
         element.addEventListener(ENTIRE_VISIBILITY_CHANGED, (event) => {
             eval(attributeHandlerCode);
         });
     }
 
-    elementsToBeWatched = $(`*[${ON_PARTIAL_VISIBIITY_CHANGED}]`);
-    watchedElements = watchedElements.concat(elementsToBeWatched);
-    for (const element of elementsToBeWatched) {
-        const attributeHandlerCode = element.getAttribute(ON_PARTIAL_VISIBIITY_CHANGED);
-        element.addEventListener(PARTIAL_VISIBILITY_CHANGED, (event) => {
-            eval(attributeHandlerCode);
-        });
-    }
+    watchedElements = uniqBy(watchedElements, (el) => {
+        return getId(el);
+    });
 });
 
 function fireEvents(){
@@ -64,29 +71,47 @@ $(document).scroll(fireEvents);
  * @return {number} VISIBILITY constants
  */
 function fireEventSpecificElement(element){
-    const prevPartialVisibility = metadataManager.getMetadata(element, "prev-partial-visibility");
-    const currPartialVisibility = getPartialVisibility(element);
+    firePartialVisibilityEventForSpecificElement(element);
+    fireEntireVisibilityEventForSpecificElement(element);
+}
 
-    const prevEntireVisibility  = metadataManager.getMetadata(element, "prev-entire-visibility");
-    const currEntireVisibility = getEntireVisibility(element);
+function firePartialVisibilityEventForSpecificElement(element){
+    let prevPartialVisibility = metadataManager.getMetadata(element, "prev-partial-visibility");
+    if (prevPartialVisibility == null)
+        prevPartialVisibility = null;
+    const currPartialVisibility = getPartialVisibility(element);
+    metadataManager.setMetadata(element, "prev-partial-visibility", currPartialVisibility);
 
     if (prevPartialVisibility !== currPartialVisibility){
         dispatchEventVisibility(PARTIAL_VISIBILITY_CHANGED,
             element, prevPartialVisibility, currPartialVisibility);
     }
+}
+function fireEntireVisibilityEventForSpecificElement(element){
+    let prevEntireVisibility  = metadataManager.getMetadata(element, "prev-entire-visibility");
+    if (prevEntireVisibility == null)
+        prevEntireVisibility = null;
+    const currEntireVisibility = getEntireVisibility(element);
+    metadataManager.setMetadata(element, "prev-entire-visibility", currEntireVisibility);
+
     if (prevEntireVisibility !== currEntireVisibility){
         dispatchEventVisibility(ENTIRE_VISIBILITY_CHANGED,
-            element, prevPartialVisibility, currPartialVisibility);
+            element, prevEntireVisibility, currEntireVisibility);
     }
 }
 
 
+
 function dispatchEventVisibility(eventName, element, previousVisibility, currentVisibility){
+    const details = {
+        element: element,
+        previousVisibility: previousVisibility,
+        currentVisibility: currentVisibility,
+    };
+
     element.dispatchEvent(
         new CustomEvent(eventName, {
-            element: element,
-            previousVisibility: previousVisibility,
-            currentVisibility: currentVisibility,
+            detail: details
         }),
     );
 }

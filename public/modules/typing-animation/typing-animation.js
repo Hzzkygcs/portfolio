@@ -48,7 +48,7 @@ class TypingAnimation{
         element = $(element);
         this.element = element;
 
-        this.children = element.children();
+        this.children = element.children("*:not(.excluded-from-animation)");
 
         this.children.sort(sortTypingAnimationByDataOrder);
         this.currentIndex = 0;
@@ -137,7 +137,6 @@ class TypingAnimation{
                         deferred.resolve();
                 });
             }
-            // delayedCallback(duration/2, hiding);
             hiding();
         }
         return deferred;
