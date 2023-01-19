@@ -24,7 +24,6 @@ function translate3d(x, y, z=0){
 
 
 function simulateParallaxMouseMove(parallaxInstance, clientX, clientY){
-    console.log("simulate", clientX, clientY);
     const event = $.Event('mousemove');
 
     event.clientX = clientX;

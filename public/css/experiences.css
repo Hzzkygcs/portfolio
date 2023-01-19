@@ -1,0 +1,69 @@
+.experiences-container {
+    --experience-div-width: 21rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media (min-width: 640px) {
+    .experiences-container{
+        --experience-div-width: 24rem;
+    }
+}
+@media (min-width: 1020px) {
+    /*.experiences-container{
+        width: calc(1rem + 2 * var(--experience-div-width))!important;
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+
+    !*  the last child of experiences-container,
+        but only if there's odd number of child  *!
+    .experiences-container > *:nth-last-child(1):nth-child(odd){
+        grid-column: span 2;
+        margin-left: auto;
+        margin-right: auto;
+    }*/
+}
+
+
+
+
+.experience-div {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-gap: 1rem;
+    width: var(--experience-div-width);
+
+    background-color: #373D5C;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.title-photo-and-details-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.experience-div .title-and-details-container{
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.experience-div .title-and-details-container .title{
+    font-size: 1.3rem;
+    line-height: 1.75rem;
+}
+.experience-div .title-and-details-container .detail{
+    color: #9ca3af;
+}
+
+.experience-div .more-details-btn{
+    background-color: #5D689C;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 0.2rem;
+}

@@ -1,0 +1,22 @@
+<div class="experiences-container">
+    <% experiences.forEach(function(experience){ %>
+        <div class="experience-div">
+            <div class="title-photo-and-details-container">
+                <div>
+                    <div class="thumbnail-box"
+                         style="--img-url: url('<%= experience.img_src %>');">
+                    </div>
+                </div>
+                <div class="title-and-details-container">
+                    <h3 class="title"><%= experience.title %></h3>
+                    <p class="detail">
+                        <%- experience.detail %>
+                    </p>
+                </div>
+            </div>
+            <div class="more-details-btn">
+                More Details
+            </div>
+        </div>
+    <% }) %>
+</div>

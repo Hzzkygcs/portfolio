@@ -533,8 +533,16 @@ video {
   position: relative;
 }
 
-.m-5 {
-  margin: 1.25rem;
+.sticky {
+  position: sticky;
+}
+
+.left-2 {
+  left: 0.5rem;
+}
+
+.top-2 {
+  top: 0.5rem;
 }
 
 .block {
@@ -547,10 +555,6 @@ video {
 
 .inline {
   display: inline;
-}
-
-.flex {
-  display: flex;
 }
 
 .table {
@@ -585,20 +589,6 @@ video {
   border-width: 1px;
 }
 
-.p-12 {
-  padding: 3rem;
-}
-
-.text-7xl {
-  font-size: 4.5rem;
-  line-height: 1;
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
 .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -626,17 +616,18 @@ body, html{
   padding: 0;
 }
 
-body {
+#main-stack-layout {
   /*background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);*/
-  background: linear-gradient(var(--main-background-grad-start) 0%, var(--main-background-grad-end) 100%);
+  background: linear-gradient(var(--main-background-grad-start) 0%,
+                var(--main-background-grad-end) 100%);
   color: var(--main-background-grad-start);
-  height: 3000px;
+  min-height: 3000px;
 }
 
 .stack{
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 100%;
+  grid-template-rows: 1fr;
 }
 
 .stacked{
@@ -645,7 +636,6 @@ body {
 }
 
 .horizontally-centerize {
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -654,6 +644,76 @@ body {
   height: 100%;
 }
 
+.no-js .hidden-on-js-not-loaded{
+  display: none;
+}
+
+.js .hidden-on-js-loaded{
+  display: none;
+}
+
+.thumbnail-box{
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  background-image: var(--img-url);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.font-white {
+  --font-color: white;
+}
+
+.font-tosca {
+  --font-color: var(--tosca);
+}
+
+.font-light-orange {
+  --font-color: var(--light-orange);
+}
+
 * {
-  text-shadow: 0 0 5px white;
+  color: var(--font-color);
+  text-shadow: 0 0 3px var(--font-color);
+}
+
+.shadow-1px-1px{
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+                1px 1px 2px 0 var(--tw-shadow-color);
+}
+
+.stable-height-for-animating-text{
+  min-height: 5.5rem;
+  min-width: 10px;
+}
+
+@media only screen and (max-width: 1030px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 1030px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 2500px) {
+  html {
+    font-size: 24px;
+  }
 }

@@ -7,17 +7,18 @@ body, html{
     padding: 0;
 }
 
-body {
+#main-stack-layout {
     /*background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);*/
-    background: linear-gradient(var(--main-background-grad-start) 0%, var(--main-background-grad-end) 100%);
+    background: linear-gradient(var(--main-background-grad-start) 0%,
+                var(--main-background-grad-end) 100%);
     color: var(--main-background-grad-start);
-    height: 3000px;
+    min-height: 3000px;
 }
 
 .stack{
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 100%;
+    grid-template-rows: 1fr;
 }
 
 .stacked{
@@ -26,7 +27,7 @@ body {
 }
 
 .horizontally-centerize {
-    display: flex;
+
     flex-direction: column;
     align-items: center;
 }
@@ -35,7 +36,22 @@ body {
     height: 100%;
 }
 
+.no-js .hidden-on-js-not-loaded{
+    display: none;
+}
+.js .hidden-on-js-loaded{
+    display: none;
+}
 
+
+.thumbnail-box{
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    background-image: var(--img-url);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 
 .font-white {

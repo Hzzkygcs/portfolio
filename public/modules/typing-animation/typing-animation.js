@@ -1,8 +1,5 @@
 
-let loadedEpochMilliSeconds = Date.now();
 $(document).ready(() => {
-    $(".js-not-loaded").removeClass("js-not-loaded");
-
     const typingAnimationElements = $(".typing-animation");
 
     for (const typingAnimationElement of typingAnimationElements) {

@@ -1,11 +1,19 @@
 const express = require("express");
+const {experienceGroups} = require("./data/ExperienceData");
+const {skillGroups} = require("./data/SkillData");
 
 const app = express();
 
+app.set('views', __dirname + '\\templates');
+app.engine('html', require('ejs').renderFile);
 app.use(express.static('public'));
 
 app.get("/", (req, res) => {
-    res.sendFile("public/portofolio.html", {root: __dirname });
+
+    res.render("portofolio.ejs", {
+        "experienceGroups": experienceGroups,
+        "skillGroups": skillGroups,
+    });
 });
 
 app.listen(8080, () => console.log("Listening"));

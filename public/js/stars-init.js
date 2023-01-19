@@ -76,7 +76,7 @@ function createRandomNormalStar(z, scene){
     const minZ = MIN_Z;
     const maxZ = MAX_Z;
     let dataDepthForMinZ = 0.4;
-    if (mobileAndTabletCheck()){
+    if (runOnMobileAndTablet()){
         dataDepthForMinZ = 0.5;
     }
     const sizeForMinZ = 2.5;
@@ -101,8 +101,7 @@ $(document).ready(() => {
     let starsCount = Math.ceil(documentArea / 4500);  // exclude special stars
     starsCount = Math.min(1200, starsCount);  // mencegah terlalu banyak bintang nanti jadi ngelag
 
-    console.log(starsCount);
-    if (mobileAndTabletCheck())
+    if (runOnMobileAndTablet())
         starsCount = 200;
 
     for (let i = 0; i < 70; i++) {
@@ -119,7 +118,7 @@ $(document).ready(() => {
     }, true);
     window.parallaxInstance = parallaxInstance;
 
-    if (mobileAndTabletCheck()){
+    if (runOnMobileAndTablet()){
         scrollParallax(parallaxInstance);
     }
 

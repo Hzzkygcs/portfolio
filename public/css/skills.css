@@ -1,0 +1,19 @@
+.skill-table {
+    display: grid;
+    max-width: 90vw;
+    grid-template-columns: auto fit-content(100%);
+    grid-gap: 0.75rem;
+    width: 52rem;
+}
+
+.skill-thumbnail-box{
+    display: block;
+
+    margin: 0.5rem;
+    border-radius: 1rem;
+    width: 5rem;
+    height: 5rem;
+    background-image: var(--img-url);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <script>
+        document.documentElement.classList.remove("no-js");
+        document.documentElement.classList.add("js");
+    </script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/dist/css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/experiences.css">
+    <link rel="stylesheet" href="/css/skills.css">
+    <link rel="stylesheet" href="/css/color-palette.css">
+    <link rel="stylesheet" href="/css/star.css">
+
+    <script src="/js/lib/parallax-modified.js"></script>
+    <script src="/js/lib/iscroll.js"></script>
+    <script src="/js/lib/jquery-3.6.3.min.js"></script>
+    <script src="/js/lib/hammer.min.js"></script>
+    <script src="/js/lib/popper.js"></script>
+    <script src="/js/lib/tippy.js"></script>
+
+    <script src="/js/deferred.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/ScrollParallax.js"></script>
+
+    <script src="/modules/element-metadata/element-metadata.js"></script>
+    <script src="/modules/on-entering-screen-event/event-handler.js"></script>
+
+    <script src="/js/stars-init.js"></script>
+    <script src="/js/main.js"></script>
+
+    <link rel="stylesheet" href="/modules/typing-animation/typing-animation.css">
+    <script src="/modules/typing-animation/typing-animation.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<div class="hidden-on-js-loaded p-5 text-center">
+    Hello! <br>
+    I think your browser disabled javascript.
+    Please enable it for the best experience 😁
+</div>
+
+    <div id="main-stack-layout"
+         class="stack full-height">
+
+        <svg class="star_effect_svg scene stacked">
+
+        </svg>
+        <template id="four-point-star">
+            <g class="outer">
+                <g class="inner star_container">
+                    <path class="four-point-star-path"></path>
+                </g>
+            </g>
+        </template>
+        <template id="normal-star">
+            <g class="outer">
+                <g class="inner star_container">
+                    <circle class="normal-star-path"></circle>
+                </g>
+            </g>
+        </template>
+
+
+        <div class="content stacked p-0" style="z-index: 10; color: white;">
+            <div class="content-center">
+                <div class="h-screen flex flex-col justify-center">
+                    <h1 class="text-7xl m-5 font-white text-center">
+                        Hello!
+                    </h1>
+                    <h2 class="text-4xl sm:text-5xl text-center inline-block"
+                        style="min-height: 8.5rem;">
+                        <span class="font-white stable-height-for-animating-text">
+                            I'm Nuel,
+
+                            and I'm
+
+                            <span>
+                                a<span id="a-an" class="hidden-on-js-not-loaded">n</span>
+                            </span>
+                            <br class="inline lg:hidden">
+                        </span>
+
+                        <span class="typing-animation js-not-loaded font-tosca inline-block">
+                            <!-- TODO
+                                Hilangkan flash software engineer ketika page
+                                baru saja di-load
+                            -->
+                            <span data-order="1" class="default"
+                                  ontypingthis="convert_an_to_a()">
+                                software engineer
+                            </span>
+                            <span data-order="2" ontypingthis="convert_an_to_a()">
+                                web developer
+                            </span>
+                            <span class="max-sm:text-4xl" data-order="3" ontypingthis="convert_an_to_a();">
+                                student of Universitas Indonesia
+                            </span>
+
+                            <span class="excluded-from-animation inline-block">
+                                <!--
+                                dummy element to keep the text position stable
+                                across whole phase of the animation
+                                -->
+                            </span>
+                        </span>
+                    </h2>
+                </div>
+
+                <div class="flex flex-col items-center">
+                    <h2 id="about-me"
+                        class="text-4xl sm:text-5xl text-center inline-block">
+                        About Me
+                    </h2>
+                    <img class="m-10
+                                w-36 sm:w-48
+                                h-36 sm:h-48
+                                rounded-full border-2
+                                shadow-1px-1px shadow-white"
+                         src="../img/foto.png" alt="my photo">
+
+                    <p class="m-5 mt-0 max-w-3xl
+                              text-center sm:text-center">
+                        Hello! I'm Immanuel, and you can call me Nuel. 😃
+                        I'm a computer science student at Universitas Indonesia.
+                        I enjoy programming and creating software, especially ones that come from my ideas or ones
+                        that may solve problems around me. I'm currently looking for challenges!
+                        So if you got any challenges for me in developing some websites, mobile apps, or desktop apps,
+                        please feel free to contact me! 😁
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-center mt-20">
+                    <h1 id="experiences" class="text-4xl">
+                        Experiences
+                    </h1>
+
+                    <% Object.keys(experienceGroups).forEach(function(experienceGroupName){ %>
+                    <% var experiences = experienceGroups[experienceGroupName]; %>
+                    <div class="flex flex-col items-center mt-5">
+                        <h2 class="text-2xl mb-3">
+                            <%= experienceGroupName %>
+                        </h2>
+                        <%- include("experience-box-template.ejs", {experiences: experiences}) %>
+                    </div>
+                    <% }) %>
+
+                </div>
+
+                <div class="flex flex-col items-center mt-20">
+                    <h1 id="experiences" class="text-4xl">
+                        Skills
+                    </h1>
+                    <div class="skill-table mt-5">
+                        <% Object.keys(skillGroups).forEach(function(skillGroupName){ %>
+                            <% var skills = skillGroups[skillGroupName]; %>
+
+                            <div><%- skillGroupName %></div>
+                            <div class="flex flex-row flex-wrap items-center justify-center">
+                                <% skills.forEach(function (skill){ %>
+                                    <div class="skill-thumbnail-box" id="skill-<%- skill.id %>"
+                                         style="--img-url: url('<%= skill.img_src %>');"></div>
+
+                                    <template id="skill-tip-content-<%- skill.id %>">
+                                        <%- skill.tooltip_text %>
+                                    </template>
+                                    <script>
+                                        skillId = <%- skill.id %>;
+                                        elementSelector = "#skill-" + skillId;
+                                        tippy(elementSelector, {
+                                            content: $("#skill-tip-content-" + skillId).html()
+                                        });
+
+                                        goToLink = () => {
+                                            let link = "<%- skill.click_url %>";
+                                            window.open(link, "_blank");
+                                        }
+                                        if (runOnMobileAndTablet()){
+                                            addOnHoldEvent($(elementSelector), goToLink);
+                                        }else{
+                                            $(elementSelector).click(goToLink);
+                                        }
+                                    </script>
+                                <% }) %>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
