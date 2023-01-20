@@ -46,14 +46,12 @@ function scrollParallax(parallaxInstance){
     let scrollX = 0;
     let scrollY = 0;
     hammer.on('panmove', (e) => {
-        console.log(e.isFinal);
         scrollX -= e.deltaX*4;
         scrollY -= e.deltaY*4;
 
         simulateParallaxMouseMove(parallaxInstance, scrollX, scrollY);
     });
     hammer.on('panend', (e) => {
-        console.log("pan end");
         simulateParallaxMouseMove(parallaxInstance, scrollX, scrollY);
     });
 
