@@ -1,6 +1,7 @@
 const express = require("express");
 const {experienceGroups} = require("./data/ExperienceData");
 const {skillGroups} = require("./data/SkillData");
+const {myContacts} = require("./data/MyContactsData");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.get("/", (req, res) => {
     res.render("portofolio.ejs", {
         "experienceGroups": experienceGroups,
         "skillGroups": skillGroups,
+        "myContacts": myContacts,
     });
 });
 

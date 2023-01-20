@@ -1,0 +1,44 @@
+<div id="connect-with-me"
+     class="flex flex-col justify-start items-stretch
+            min-h-[50vh] mt-20 mb-10 p-10">
+
+
+    <div class="flex flex-col flex-grow justify-center items-center mt-8">
+        <h2 class="text-4xl mb-16">Reach Me</h2>
+
+        <div class="p-2">
+            <a href="mailto:<%- myContacts.email %>" target="_blank">
+                <div>
+                    <img src="/img/social-media/gmail.png" class="inline-block w-10 h-10 ml-4 mr-4">
+
+                    <span class="text-xl font-thin align-middle">
+                        <%- myContacts.email %>
+                    </span>
+                </div>
+            </a>
+        </div>
+        <div class="flex flex-row justify-center items-center p-2">
+            <a target="_blank" href="<%- myContacts.linkedinUrl %>">
+                <img src="/img/social-media/linked-in.svg"
+                     class="social-media-icon">
+            </a>
+            <a target="_blank" href="<%- myContacts.gitlabUrl %>">
+                <img src="/img/social-media/gitlab.png"
+                     class="social-media-icon">
+            </a>
+            <a target="_blank" href="<%- myContacts.githubUrl %>">
+                <img src="/img/social-media/github.svg"
+                     class="social-media-icon">
+            </a>
+            <a target="_blank" href="<%- myContacts.instagramUrl %>">
+                <img src="/img/social-media/instagram.svg"
+                     class="instagram social-media-icon">
+            </a>
+            <!-- TODO -->
+            <a target="_blank" href="<%- myContacts.stackoverflowUrl %>">
+                <img src="/img/social-media/instagram.svg"
+                     class="instagram social-media-icon">
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+.social-media-icon{
+    --size: 3rem;
+
+    width: var(--size);
+    height: var(--size);
+    margin: 1rem;
+}
+
+.instagram{
+    --size: 3.9rem;
+}
