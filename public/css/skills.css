@@ -8,6 +8,7 @@
 
 .skill-thumbnail-box{
     display: block;
+    cursor: pointer;
 
     margin: 0.5rem;
     border-radius: 1rem;

@@ -8,21 +8,10 @@ $(document).ready(() => {
 
         window.typingAnimation = typingAnimation;
     }
+    typingAnimationElements.removeClass("not-ready");
 });
 
 
-function convert_an_to_a(){
-    return new Promise((res, rej) => {
-        $('#a-an').fadeOut(800);
-        res();
-    });
-}
-function convert_a_to_an(){
-    return new Promise((res, rej) => {
-        $('#a-an').fadeIn(800);
-        res();
-    });
-}
 
 
 function sortTypingAnimationByDataOrder(a, b){

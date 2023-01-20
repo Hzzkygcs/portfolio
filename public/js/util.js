@@ -47,29 +47,57 @@ function runOnMobileAndTablet() {
 }
 
 
-function addOnHoldEvent(el, eventHandler, timeout=600){
+function addOnHoldEvent(el, holdEventHandler,
+                        clickEventHandler, timeout=600, disableRightClickSimulation=true){
     el = $(el);
-    console.assert(runOnMobileAndTablet());
 
     let startPress;
     let timeoutId;
+    let startPressCoordinate;
+    let currPressCoordinate;  // NOSONAR
     const onHold = (e) => {
+        const distance = 0;
+        console.log("dist", distance);
+        if (distance > 10)
+            return;
+
         const endPress = e.timeStamp;
         const duration = endPress - startPress;
-        console.log("On Long Hold", duration);
-        eventHandler(el, duration);
+        if (duration < timeout){
+            console.log("dur", duration);
+            clickEventHandler(e);
+            return;
+        }
+        holdEventHandler(el, duration);
     };
-    el.on("touchstart", function (e){
+    el.on("pointerdown", (e) => {
+        console.log("down");
+        startPressCoordinate = [e.originalEvent.clientX, e.originalEvent.clientY];  // NOSONAR
+        if (e.pointerType === "mouse")
+            return;
         startPress = e.timeStamp;
-        timeoutId = setTimeout(() => onHold(e), timeoutId);
+        timeoutId = setTimeout(() => onHold(
+            Object.assign(e, {
+                timeStamp: startPress + timeout + 5,  // + 5 is arbitrary to keep it a bit greater than threshold
+            })
+        ), timeout);
     });
-    el.on("touchend", function (e){
-        const endPress = e.timeStamp;
-        const duration = endPress - startPress;
-        if (duration > 600)
-            onHold(e);
-        else clearTimeout(timeoutId);
+    el.on('pointermove', (e) => {
+        console.log("move");
+        currPressCoordinate = [e.originalEvent.clientX, e.originalEvent.clientY];  // NOSONAR
+    });
+    el.on("pointerup", function (e){
+        console.log("up");
+        currPressCoordinate = [e.originalEvent.clientX, e.originalEvent.clientY];  // NOSONAR
+        if (e.pointerType === "mouse")
+            return;
+        onHold(e);
+        clearTimeout(timeoutId);
     })
+    if (disableRightClickSimulation)
+        el.on("contextmenu", (e) => {
+            e.preventDefault();
+        });
 }
 
 
