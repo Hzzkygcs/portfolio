@@ -1,8 +1,11 @@
 let toastCount = 0;
 function showToast(
-    toastMessage, toastIconSrc, timeoutMs=3000,
-    showingUpAnimationDurationMs=300,
-    leavingAnimationDurationMs=500,
+    {
+        toastMessage, toastIconSrc, timeoutMs = 3000,
+        showingUpAnimationDurationMs = 300,
+        leavingAnimationDurationMs = 500,
+        additionalClass = [],
+    }
 ){
     const toastTemplate = $("#toast-template");
     const toastElement = $(toastTemplate.html());
@@ -13,6 +16,9 @@ function showToast(
     toastElement.find(".toast-msg").html(toastMessage);
     toastElement.get(0).style.setProperty("--show-up-animation-duration",
         showingUpAnimationDurationMs + "ms");
+    for (const class_ of additionalClass) {
+        toastElement.addClass(class_);
+    }
 
     $("body").append(toastElement);
     setTimeout(() => {

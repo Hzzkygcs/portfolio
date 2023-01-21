@@ -10,3 +10,16 @@
     --size: 3.9rem;
 }
 
+
+.copied-notification-toast .toast-msg{
+    color: #0fa4c2;
+    font-weight: 500;
+}
+.copied-notification-toast .toast-logo{
+    /*
+    convert white SVG into #0fa4c2.
+    see https://codepen.io/sosuke/pen/Pjoqqp and https://stackoverflow.com/a/53336754/7069108
+    */
+    filter: brightness(0) saturate(100%) invert(55%) sepia(55%) saturate(5588%)
+            hue-rotate(159deg) brightness(99%) contrast(88%);
+}
