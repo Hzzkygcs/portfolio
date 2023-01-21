@@ -8,7 +8,7 @@
 
         <div class="p-2">
             <a class="cursor-pointer"
-
+               data-tippy-content="click to copy the email to clipboard"
                onclick="navigator.clipboard.writeText('<%- myContacts.email %>');
                         showToast({
                             toastMessage: 'Email copied',
@@ -25,23 +25,28 @@
             </a>
         </div>
         <div class="flex flex-row justify-center items-center p-2">
-            <a target="_blank" href="<%- myContacts.linkedinUrl %>">
+            <a target="_blank" href="<%- myContacts.linkedinUrl %>"
+               data-tippy-content="Linked in">
                 <img src="/img/social-media/linked-in.svg"
                      class="social-media-icon">
             </a>
-            <a target="_blank" href="<%- myContacts.gitlabUrl %>">
+            <a target="_blank" href="<%- myContacts.gitlabUrl %>"
+               data-tippy-content="Gitlab">
                 <img src="/img/social-media/gitlab.png"
                      class="social-media-icon">
             </a>
-            <a target="_blank" href="<%- myContacts.githubUrl %>">
+            <a target="_blank" href="<%- myContacts.githubUrl %>"
+               data-tippy-content="Github">
                 <img src="/img/social-media/github.svg"
                      class="social-media-icon">
             </a>
-            <a target="_blank" href="<%- myContacts.stackoverflowUrl %>">
+            <a target="_blank" href="<%- myContacts.stackoverflowUrl %>"
+               data-tippy-content="Stackoverflow">
                 <img src="/img/social-media/stackoverflow.png"
                      class="social-media-icon">
             </a>
-            <a target="_blank" href="<%- myContacts.instagramUrl %>">
+            <a target="_blank" href="<%- myContacts.instagramUrl %>"
+               data-tippy-content="Instagram">
                 <img src="/img/social-media/instagram.svg"
                      class="instagram social-media-icon">
             </a>
@@ -52,3 +57,6 @@
 
 
 
+<script>
+    tippy('[data-tippy-content]');
+</script>
