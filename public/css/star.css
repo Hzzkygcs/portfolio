@@ -6,9 +6,12 @@
 }
 
 
-.star_effect_svg {
-    width: 100%;
+.star-effect-svg {
+    grid-column: 1;
+    grid-row: 1/-1;
+
     height: 100%;
+    width: 100%;
 }
 
 .star_container{

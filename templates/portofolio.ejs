@@ -23,8 +23,18 @@
     <div id="main-stack-layout"
          class="stack full-height">
 
-        <svg class="star_effect_svg scene stacked">
+        <% var gridRowPosition = 1; %>
+        <%- include("sections/1-typing-animation-welcome-section.ejs", {rowPos: gridRowPosition++}); %>
+        <%- include("sections/2-about-me-section.ejs", {rowPos: gridRowPosition++}); %>
+        <%- include("sections/3-experiences-section.ejs", {experienceGroups: experienceGroups, rowPos: gridRowPosition++}); %>
+        <%- include("sections/4-skills-template.ejs", {skillGroups: skillGroups, rowPos: gridRowPosition++}); %>
+        <%- include("sections/5-my-contacts-section.ejs", {myContacts: myContacts, rowPos: gridRowPosition++}); %>
+
+
+        <svg class="star-effect-svg scene">
         </svg>
+
+
         <template id="four-point-star">
             <g class="outer">
                 <g class="inner star_container">
@@ -39,18 +49,6 @@
                 </g>
             </g>
         </template>
-
-
-        <div class="content stacked p-0" style="z-index: 10; color: white;">
-            <div class="content-center">
-                <%- include("sections/1-typing-animation-welcome-section.ejs"); %>
-                <%- include("sections/2-about-me-section.ejs"); %>
-                <%- include("sections/3-experiences-section.ejs", {experienceGroups: experienceGroups}); %>
-                <%- include("sections/4-skills-template.ejs", {skillGroups: skillGroups}); %>
-                <%- include("sections/5-my-contacts-section.ejs", {myContacts: myContacts}); %>
-
-            </div>
-        </div>
     </div>
 
     <%- include("sections/used-templates/toast-template.ejs"); %>

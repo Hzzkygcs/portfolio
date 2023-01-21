@@ -15,6 +15,7 @@ app.get("/", (req, res) => {
         "experienceGroups": experienceGroups,
         "skillGroups": skillGroups,
         "myContacts": myContacts,
+
     });
 });
 
