@@ -1,0 +1,29 @@
+.toast-box{
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    z-index: 100;
+
+    --translate-x: translateX(-50%);
+    --translate-y: translateY(-100%);
+    transform: var(--translate-x);
+
+    --transition-duration: 300ms;
+
+    /*noinspection CssUnresolvedCustomProperty*/
+    transition: left var(--transition-duration),
+                bottom var(--transition-duration),
+                transform var(--show-up-animation-duration);
+}
+
+.toast-box.deployed{
+    bottom: 1.5rem;
+    --translate-y: translateY(0);
+}
+
+@media only screen and (min-width: 600px) {
+    .toast-box{
+        left: 1.5rem;
+        transform: none;
+    }
+}
