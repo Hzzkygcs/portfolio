@@ -30,6 +30,17 @@
         <%- include("sections/4-skills-template.ejs", {skillGroups: skillGroups, rowPos: gridRowPosition++}); %>
         <%- include("sections/5-my-contacts-section.ejs", {myContacts: myContacts, rowPos: gridRowPosition++}); %>
 
+        <%# giving per-section colors %>
+        <% for (var i=0; i < colorsForEachSection.length; i++){ %>
+            <% var colorEnd = colorsForEachSection[i]; %>
+            <% var colorStart = (i-1 < 0)? colorEnd : colorsForEachSection[i-1]; %>
+
+            <div class="section-gradient-effect col-start-1"
+                 style="grid-row: <%- i+1 %>;
+                        background: linear-gradient(180deg, <%-colorStart%> 0%, <%-colorEnd%> 5%);
+                        ">
+            </div>
+        <% } %>
 
         <svg class="star-effect-svg scene">
         </svg>

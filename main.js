@@ -11,11 +11,26 @@ app.use(express.static('public'));
 
 app.get("/", (req, res) => {
 
+    const gradient1 = [
+        "#2C4057",
+        "#1B2735",
+        "#2C4057",
+        "#1B2735",
+        "#2C4057",
+    ];
+    const gradient2 = [
+        "#1C1F2F",
+        "#090A0F",
+        "#1C1F2F",
+        "#090A0F",
+        "#1C1F2F",
+    ];
+
     res.render("portofolio.ejs", {
         "experienceGroups": experienceGroups,
         "skillGroups": skillGroups,
         "myContacts": myContacts,
-
+        "colorsForEachSection": gradient2,
     });
 });
 

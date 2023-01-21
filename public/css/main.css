@@ -21,8 +21,22 @@ body, html{
 }
 
 .content-section-container{
+    z-index: 2;
     color: white;
     grid-column: 1;
+
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+}
+
+.ending-section{
+    margin-bottom: 2.5rem;
+}
+
+.section-gradient-effect{
+    z-index: 1;
+    height: 100%;
+    width: 100%;
 }
 
 .horizontally-centerize {
@@ -59,10 +73,6 @@ body, html{
 
 .font-tosca {
     --font-color: var(--tosca);
-}
-
-.font-light-orange {
-    --font-color: var(--light-orange);
 }
 
 * {
