@@ -48,7 +48,9 @@ function runOnMobileAndTablet() {
 
 
 function addOnHoldEvent(el, holdEventHandler,
-                        clickEventHandler, timeout=600, disableRightClickSimulation=true){
+                        clickEventHandler, timeout=600,
+                        disableRightClickSimulation=true,
+                        disableImmediateHandle=true){
     el = $(el);
 
     let startPress;
@@ -76,11 +78,13 @@ function addOnHoldEvent(el, holdEventHandler,
         if (e.pointerType === "mouse")
             return;
         startPress = e.timeStamp;
-        timeoutId = setTimeout(() => onHold(
-            Object.assign(e, {
-                timeStamp: startPress + timeout + 5,  // + 5 is arbitrary to keep it a bit greater than threshold
-            })
-        ), timeout);
+        if (!disableImmediateHandle) {
+            timeoutId = setTimeout(() => onHold(
+                Object.assign(e, {
+                    timeStamp: startPress + timeout + 5,  // + 5 is arbitrary to keep it a bit greater than threshold
+                })
+            ), timeout);
+        }
     });
     el.on('pointermove', (e) => {
         console.log("move");

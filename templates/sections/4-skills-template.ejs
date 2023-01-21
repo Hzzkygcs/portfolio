@@ -9,37 +9,39 @@
             <div><%- skillGroupName %></div>
             <div class="flex flex-row flex-wrap items-center justify-left">
                 <% skills.forEach(function (skill){ %>
-                    <div class="skill-thumbnail-box" id="skill-<%- skill.id %>"
-                         style="--img-url: url('<%= skill.img_src %>');"></div>
+                    <div>
+                        <div class="skill-thumbnail-box"
+                             style="--img-url: url('<%= skill.img_src %>');"></div>
 
-                    <template id="skill-tip-content-<%- skill.id %>">
-                        <%- skill.tooltip_text %>
-                    </template>
-                    <a id="skill-a-<%- skill.id %>"
-                       href="<%- skill.click_url %>"
-                       target="_blank" ></a>
-                    <script>
-                        (() => {
-                            let skillId = <%- skill.id %>;
-                            let elementSelector = "#skill-" + skillId;
-                            const tip = tippy(elementSelector, {
-                                content: $("#skill-tip-content-" + skillId).html(),
-                            });
+                        <template class="skill-tip-content">
+                            <%- skill.tooltip_text %>
+                        </template>
+                        <a class="skill-link"
+                           href="<%- skill.click_url %>"
+                           target="_blank" ></a>
+                        <script>
+                            ((scriptTagElement) => {
+                                const currentContainer = $(scriptTagElement).parent();
+                                const element = currentContainer.find(".skill-thumbnail-box").get(0);
 
-                            let goToLink = () => {
-                                document.getElementById("skill-a-" + skillId).click();
-                                console.log("Click", "skill-a-" + skillId);
-                            }
-                            addOnHoldEvent($(elementSelector), goToLink,  (e) => {
-                                $(elementSelector)[0].dispatchEvent(new Event("mouseenter"));
-                            });
-                            $(elementSelector).on('pointerup', (e) => {
-                                if (e.pointerType !== "mouse")
-                                    return;
-                                goToLink();
-                            });
-                        })();
-                    </script>
+                                tippy(element, {
+                                    content: currentContainer.find(".skill-tip-content").html(),
+                                });
+
+                                let goToLink = () => {
+                                    currentContainer.find(".skill-link").get(0).click();
+                                }
+                                addOnHoldEvent(element, goToLink,  (e) => {
+                                    element.dispatchEvent(new Event("mouseenter"));
+                                });
+                                $(element).on('pointerup', (e) => {
+                                    if (e.pointerType !== "mouse")
+                                        return;
+                                    goToLink();
+                                });
+                            })(document.currentScript);
+                        </script>
+                    </div>
                 <% }) %>
             </div>
         <% }) %>
