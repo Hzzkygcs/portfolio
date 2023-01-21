@@ -8,7 +8,8 @@
 
         <div class="p-2">
             <a class="cursor-pointer"
-               onclick="showToast('Email copied', '/img/misc/copy-svgrepo-com.svg');">
+               onclick="navigator.clipboard.writeText('<%- myContacts.email %>');
+                        showToast('Email copied', '/img/misc/copy-svgrepo-com.svg');">
                 <div>
                     <img src="/img/social-media/gmail.png" class="inline-block w-10 h-10 ml-4 mr-4">
 
