@@ -1,3 +1,5 @@
+<% var toastIconSrc = "/img/misc/copy-svgrepo-com.svg"; %>
+
 <div id="connect-with-me"
      class="content-section-container ending-section flex flex-col justify-start items-stretch
             min-h-[50vh]"
@@ -13,7 +15,7 @@
                onclick="navigator.clipboard.writeText('<%- myContacts.email %>');
                         showToast({
                             toastMessage: 'Email copied',
-                            toastIconSrc: '/img/misc/copy-svgrepo-com.svg',
+                            toastIconSrc: '<%- toastIconSrc %>',
                             additionalClass: ['copied-notification-toast'],
                         });">
                 <div>
@@ -56,6 +58,8 @@
 </div>
 
 
+<!-- for eager loading/caching -->
+<img src="<%- toastIconSrc %>" class="hidden">
 
 
 <script>

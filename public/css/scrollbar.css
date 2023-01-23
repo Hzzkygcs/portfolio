@@ -1,0 +1,15 @@
+*::-webkit-scrollbar {
+    width: 0.6rem;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(116, 116, 116, 0.75);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+
+}
+
+*::-webkit-scrollbar-thumb {
+    background: rgba(247, 247, 247, 0.8);
+    border: 1px solid #a8a8a8;
+    border-radius: 1000rem;  /* arbitrary very large constant (not percent) value */
+}

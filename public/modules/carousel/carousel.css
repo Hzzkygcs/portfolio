@@ -1,0 +1,80 @@
+.carousel{
+    height: 25rem;
+}
+
+.carousel .carousel-stack {
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+}
+.carousel .carousel-stacked{
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+}
+
+.carousel .control-layer{
+    z-index: 2;
+}
+.carousel .content-layer{
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+
+.carousel .content{
+    grid-row: 1;
+    grid-column: 1;
+
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    margin: 0;
+    padding: 0;
+    clip-path: inset(0, 0, 100%, 100%);
+}
+
+.carousel .content.not-active{
+    display: none;
+}
+.carousel .content.active.left{
+    animation-name: carousel-sliding-in-to-left;
+    animation-duration: 0.5s;
+}
+.carousel .content.active.right{
+    animation-name: carousel-sliding-in-to-right;
+    animation-duration: 0.5s;
+}
+.carousel .content.deactivating.left{
+    animation-name: carousel-sliding-out-to-left;
+    animation-duration: 0.5s;
+}
+.carousel .content.deactivating.right{
+    animation-name: carousel-sliding-out-to-right;
+    animation-duration: 0.5s;
+}
+
+@keyframes carousel-sliding-in-to-left {
+    from {transform: translateX(100%);}
+    to {transform: translateX(0);}
+}
+
+@keyframes carousel-sliding-out-to-left {
+    from {transform: translateX(0);}
+    to {transform: translateX(-100%);}
+}
+
+
+@keyframes carousel-sliding-in-to-right {
+    from {transform: translateX(-100%);}
+    to {transform: translateX(0);}
+}
+@keyframes carousel-sliding-out-to-right {
+    from {transform: translateX(0);}
+    to {transform: translateX(100%);}
+}
