@@ -42,11 +42,16 @@
 .carousel .content.not-active{
     display: none;
 }
-.carousel .content.active.left{
+.carousel .content.active{
+    display: block;
+}
+
+
+.carousel .content.activating.left{
     animation-name: carousel-sliding-in-to-left;
     animation-duration: 0.5s;
 }
-.carousel .content.active.right{
+.carousel .content.activating.right{
     animation-name: carousel-sliding-in-to-right;
     animation-duration: 0.5s;
 }

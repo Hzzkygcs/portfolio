@@ -75,6 +75,8 @@ class ElementMetadataManager{
 
 
 function getId(element){
+    element = jqueryToNormalObject(element);
+
     const id = element.getAttribute(DATA_ELEMENT_ID_ATTRIBUTE);
     if (id != null)
         return id;

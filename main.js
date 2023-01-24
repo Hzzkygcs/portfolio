@@ -20,17 +20,31 @@ app.get("/", (req, res) => {
     ];
     const gradient2 = [
         "#1C1F2F",
-        "#090A0F",
+        "#263345",
         "#1C1F2F",
-        "#090A0F",
+        "#263345",
         "#1C1F2F",
+    ];
+    const gradient3 = [
+        "#1C1F2F",
+        "#23273B",
+        "#282C42",
+        "#2C314A",
+        "#313652",
+    ];
+    const gradient4 = [
+        "#192429",
+        "#1d292f",
+        "#212e36",
+        "#25343c",
+        "#293942",
     ];
 
     res.render("portofolio.ejs", {
         "experienceGroups": experienceGroups,
         "skillGroups": skillGroups,
         "myContacts": myContacts,
-        "colorsForEachSection": gradient2,
+        "colorsForEachSection": gradient4,
     });
 });
 
