@@ -3,28 +3,103 @@ const carouselMetadata = new ModuleMetadataManager("carousel");
 const isAnimationRunningKey = "is-animation-running";
 const onAnimationEndExecutionStackKey = "on-animation-end-execution-stack";
 
+const currPageKey = "curr-page";
+const contentTemplate = "content-template";
+
 function initializeCarousel(carouselId){
     const carousel = $("#" + carouselId);
-    const contents = $(carousel).find(".content-layer").children();
 
     carouselMetadata.setMetadata(carousel, currPageKey, 0);
-    for (let content of contents) {
-        content = $(content);
-
-        carouselMetadata.setMetadata(content, onAnimationEndExecutionStackKey, []);
-        carouselMetadata.setMetadata(content, isAnimationRunningKey, false);
-        content.on("animationstart",
-            () => carouselMetadata.setMetadata(content, isAnimationRunningKey, true));
-
-        content.on("animationend", () => {
-            console.log("animationend", getId(content));
-            carouselMetadata.setMetadata(content, isAnimationRunningKey, false);
-
-            const executionStack = getExecutionStackOnAnimationFinished(content);
-            executeOnAnimationFinished(executionStack);
-        });
-    }
+    carouselMetadata.setMetadata(carousel, contentTemplate,
+        $(carousel.find(".content-template").html()).filter("img")
+    );
+    const newPage = carouselDeployNewSlide(carousel, 0);
+    carouselAnimateSlideAnimation([], newPage, leftClass);
 }
+
+
+
+
+
+const activeClass = "active";
+const notAciveClass = "not-active";
+const deactivatingClass = "deactivating";
+const activatingClass = "activating";
+const leftClass = "left";
+const rightClass = "right";
+
+
+
+function carouselChangeSlide(carouselId, goToNext = true) {
+    const carousel = document.getElementById(carouselId);
+    const contentLayer = $(carousel).find(".content-layer");
+    const currentPages = contentLayer.children();
+    const pageTemplate = carouselMetadata.getMetadata(carousel, contentTemplate);
+    const slideDirectionClass = goToNext ? leftClass : rightClass;
+
+    const pageIncrement = goToNext? 1 : -1;
+    const currPage = carouselMetadata.getMetadata(carousel, "curr-page");
+    let nextPage = (currPage + pageIncrement) % pageTemplate.length;
+    nextPage = (pageTemplate.length + nextPage) % pageTemplate.length;  // handle negative number modulo by positive
+    carouselMetadata.setMetadata(carousel, currPageKey, nextPage);
+
+    const nextPageEl = carouselDeployNewSlide(carousel, nextPage)
+    carouselAnimateSlideAnimation([getLastItem(currentPages)], nextPageEl, slideDirectionClass)
+}
+function getLastItem(arr){
+    return arr[arr.length - 1];
+}
+
+function carouselSetUpSlide(slideEl){
+    slideEl = $(slideEl);
+
+    carouselMetadata.setMetadata(slideEl, onAnimationEndExecutionStackKey, []);
+    carouselMetadata.setMetadata(slideEl, isAnimationRunningKey, false);
+    slideEl.on("animationstart",
+        () => carouselMetadata.setMetadata(slideEl, isAnimationRunningKey, true));
+
+    slideEl.on("animationend", () => {
+        console.log("animationend", getId(slideEl));
+        carouselMetadata.setMetadata(slideEl, isAnimationRunningKey, false);
+
+        const executionStack = getExecutionStackOnAnimationFinished(slideEl);
+        executeOnAnimationFinished(executionStack);
+    });
+}
+
+let nextZIndex = 1;
+function carouselDeployNewSlide(carousel, index) {
+    const contents = carouselMetadata.getMetadata(carousel, contentTemplate);
+    const contentLayer = $(carousel).find(".content-layer");
+
+    const nextPageEl = $(contents[index].outerHTML);
+    nextPageEl.addClass("not-active");
+    nextPageEl.css('position', 'relative');
+    nextPageEl.css('z-index', nextZIndex++);
+    contentLayer.append(nextPageEl);
+
+    carouselMetadata.setMetadata(nextPageEl, isAnimationRunningKey, false);
+    carouselMetadata.setMetadata(nextPageEl, onAnimationEndExecutionStackKey, []);
+    carouselSetUpSlide(nextPageEl);
+    return nextPageEl;
+}
+
+function carouselAnimateSlideAnimation(currentPages, nextPageEl, slideDirectionClass){
+    for (const currPageEl of currentPages){
+        addCodeExecutionStackOnAnimationFinished(currPageEl,
+            () => nextState(currPageEl, slideDirectionClass));  // from active to deactivating
+        addCodeExecutionStackOnAnimationFinished(currPageEl,
+            () => {nextState(currPageEl, slideDirectionClass); return true;});  // from deactivating to removal
+    }
+
+    addCodeExecutionStackOnAnimationFinished(nextPageEl,
+        () => nextState(nextPageEl, slideDirectionClass));  // from not-active to activating
+    addCodeExecutionStackOnAnimationFinished(nextPageEl,
+        () => {nextState(nextPageEl, slideDirectionClass); return true;});  // from activating to active
+}
+
+
+
 
 function getExecutionStackOnAnimationFinished(element){
     return carouselMetadata.getMetadata(element, onAnimationEndExecutionStackKey);
@@ -55,6 +130,9 @@ function addCodeExecutionStackOnAnimationFinished(
     }
 }
 function executeOnAnimationFinished(funcStack){
+    if (funcStack.length == 0)
+        return;
+
     let func = funcStack.pop();
     let immediateTriggerNextExecution = func();
     while (immediateTriggerNextExecution && funcStack.length > 0) {
@@ -65,52 +143,17 @@ function executeOnAnimationFinished(funcStack){
 
 
 
-const currPageKey = "curr-page";
-
-const activeClass = "active";
-const notAciveClass = "not-active";
-const deactivatingClass = "deactivating";
-const activatingClass = "activating";
-const leftClass = "left";
-const rightClass = "right";
-
-
-function carouselChangeSlide(carouselId, goToNext=true){
-    const carousel = document.getElementById(carouselId);
-    const contents = $(carousel).find(".content-layer").children();
-
-    const pageIncrement = goToNext? 1 : -1;
-    const currPage = carouselMetadata.getMetadata(carousel, "curr-page");
-    const nextPage = (currPage + pageIncrement) % contents.length;
-    carouselMetadata.setMetadata(carousel, currPageKey, nextPage);
-
-    const slideDirectionClass = goToNext ? leftClass : rightClass;
-    const currPageEl = contents.eq(currPage);
-    const nextPageEl = contents.eq(nextPage);
-
-    addCodeExecutionStackOnAnimationFinished(currPageEl,
-        () => nextState(currPageEl, slideDirectionClass));  // from active to deactivating
-    addCodeExecutionStackOnAnimationFinished(currPageEl,
-        () => {nextState(currPageEl, slideDirectionClass); return true;});  // from deactivating to not-active
-
-    addCodeExecutionStackOnAnimationFinished(nextPageEl,
-        () => nextState(nextPageEl, slideDirectionClass));  // from not-active to activating
-    addCodeExecutionStackOnAnimationFinished(nextPageEl,
-        () => {nextState(nextPageEl, slideDirectionClass); return true;});  // from activating to active
-}
-
-
-
 function nextState(el, direction){
     el = $(el);
-    if (el.hasClass(activatingClass))
+
+    if (el.hasClass(notAciveClass))
+        return changeStateFromNotActiveToActivating(el, direction);
+    else if (el.hasClass(activatingClass))
         return changeStateFromActivatingToActive(el);
     else if (el.hasClass(activeClass))
         return changeStateFromActiveToDeactivating(el, direction);
     else if (el.hasClass(deactivatingClass))
-        return changeStateFromDeactivatingToNotActive(el);
-    else if (el.hasClass(notAciveClass))
-        return changeStateFromNotActiveToActivating(el, direction);
+        return changeStateFromDeactivatingToVoid(el);
 }
 
 function changeStateFromActivatingToActive(el){
@@ -129,12 +172,11 @@ function changeStateFromActiveToDeactivating(el, direction) {
     removeAndAddClasses(el, [activeClass], [deactivatingClass, direction]);
 }
 
-function changeStateFromDeactivatingToNotActive(el){
+function changeStateFromDeactivatingToVoid(el){
     el = $(el);
     debug(`Deactivating to not-active ` + getId(el));
     console.assert(el.hasClass(deactivatingClass));
-    removeDirectionClass(el);
-    removeAndAddClasses(el, [deactivatingClass], [notAciveClass]);
+    el.remove();
 }
 
 function changeStateFromNotActiveToActivating(el, direction){
