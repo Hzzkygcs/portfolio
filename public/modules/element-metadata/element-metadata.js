@@ -24,6 +24,7 @@ class ModuleMetadataManager {
     }
 
     getMetadata(element, metadataKeyword) {
+        element = jqueryToNormalObject(element);
         metadataKeyword = this._getMetadatakeyword(metadataKeyword);
 
         const elementMetadataManager = this.getManager(element);
@@ -31,11 +32,20 @@ class ModuleMetadataManager {
     }
 
     setMetadata(element, metadataKeyword, value) {
+        element = jqueryToNormalObject(element);
         metadataKeyword = this._getMetadatakeyword(metadataKeyword);
 
         const elementMetadataManager = this.getManager(element);
         return elementMetadataManager.setMetadata(metadataKeyword, value);
     }
+}
+
+function jqueryToNormalObject(el, throwIfLengthIsNotOne = true){
+    if (!(el instanceof jQuery))
+        return el;
+    if (throwIfLengthIsNotOne && el.length !== 1)
+        throw new Error("Element is not one");
+    return el[0];
 }
 
 
@@ -72,7 +82,7 @@ function getId(element){
 }
 
 function reserveNewId(element){
-    const currentId = metadataDictionaries.length;
+    const currentId = Object.keys(metadataDictionaries).length;
     metadataDictionaries[currentId] = {};
     element.setAttribute(DATA_ELEMENT_ID_ATTRIBUTE, currentId);
     return currentId;
