@@ -629,6 +629,10 @@ body, html{
   grid-template-rows: repeat(5, fit-content(100%));
 }
 
+
+.content-section-container.first-section{
+  margin-top: 0;
+}
 .content-section-container{
   position: relative;
   z-index: 3;
