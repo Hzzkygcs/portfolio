@@ -11,6 +11,7 @@ OT:
 Tantra:
     - Gradient 2 lebih bagus daripada gradient 1, tapi gradient 1 juga cakep2 aja
 Tara:
+    - Gradient 4 lebih bagus daripada gradient 1
     - Gradient 1 lebih bagus daripada gradient 2
 Faiz:
     - Gradient 4 lebih bagus daripada gradient 1
