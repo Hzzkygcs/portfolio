@@ -32,12 +32,23 @@
 
         <%# giving per-section colors %>
         <% for (var i=0; i < colorsForEachSection.length; i++){ %>
-            <% var colorEnd = colorsForEachSection[i]; %>
-            <% var colorStart = (i-1 < 0)? colorEnd : colorsForEachSection[i-1]; %>
+            <% var colorMain = colorsForEachSection[i]; %>
+            <% var colorStart = (i-1 < 0)? colorMain : colorsForEachSection[i-1]; %>
+            <% var colorEnd = (i+1 >= colorsForEachSection.length)? colorMain : colorsForEachSection[i+1]; %>
+
+            <% var colorStartPosition     = - gradientSpreadPercentage; %>
+            <% var colorMainUpperPosition = + gradientSpreadPercentage; %>
+            <% var colorMainLowerPosition = 100 - gradientSpreadPercentage; %>
+            <% var colorEndLowerPosition  = 100 + gradientSpreadPercentage; %>
 
             <div class="section-gradient-effect col-start-1"
                  style="grid-row: <%- i+1 %>;
-                        background: linear-gradient(180deg, <%-colorStart%> 0%, <%-colorEnd%> 5%);
+                        background: linear-gradient(180deg,
+                         <%-colorStart%> <%-colorStartPosition%>%,
+                         <%-colorMain%> <%-colorMainUpperPosition%>%,
+                         <%-colorMain%> <%-colorMainLowerPosition%>%,
+                         <%-colorEnd%> <%-colorEndLowerPosition%>%
+                         );
                         ">
             </div>
         <% } %>

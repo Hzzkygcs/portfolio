@@ -24,6 +24,8 @@ Zain:
     - Gradient 4 bagus
     - Gradient 2 dan 3 aneh
     - Gradient 1 juga aneh
+Akmal:
+    - prefer gradient 1 instead of gradient 4
  */
 const gradients = {
     gradient1: [  // immanuel - 1.pdf
@@ -56,3 +58,6 @@ const gradients = {
     ],
 }
 module.exports.gradients = gradients;
+
+const gradientSpreadPercentage = 10;
+module.exports.gradientSpreadPercentage = gradientSpreadPercentage;

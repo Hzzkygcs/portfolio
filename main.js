@@ -2,7 +2,7 @@ const express = require("express");
 const {experienceGroups} = require("./data/ExperienceData");
 const {skillGroups} = require("./data/SkillData");
 const {myContacts} = require("./data/MyContactsData");
-const {gradients} = require("./configuration/style");
+const {gradients, gradientSpreadPercentage} = require("./configuration/style");
 
 const app = express();
 
@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
         "skillGroups": skillGroups,
         "myContacts": myContacts,
         "colorsForEachSection": gradients.gradient4,
+        "gradientSpreadPercentage": gradientSpreadPercentage,
     });
 });
 
