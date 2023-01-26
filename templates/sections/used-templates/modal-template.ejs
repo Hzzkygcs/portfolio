@@ -22,15 +22,3 @@
         </div>
     </div>
 </template>
-
-<template id="temppp">
-    <%- include('carousel-template.ejs', {carouselId: "carousel-1"}); %>
-</template>
-
-<script>
-    $(document).ready(() => {
-        showModal("abc", [
-            $($("#temppp").html())
-        ]);
-    });
-</script>

@@ -1,6 +1,18 @@
+<%
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+
+        // The maximum is exclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+%>
+
 <div class="experiences-container">
     <% experiences.forEach(function(experience){ %>
-        <div class="experience-div">
+
+        <% var id = getRandomInt(1, 1000_000); %>
+        <div class="experience-div" id="experience-<%-id%>">
             <div class="title-photo-and-details-container">
                 <div>
                     <div class="thumbnail-box"
@@ -17,6 +29,22 @@
             <div class="more-details-btn noselect">
                 More Details
             </div>
+
+
+            <template id="experience-modal-<%-id%>">
+                <%- experience.modalOnClick.toString() %>
+            </template>
+
+            <script>
+                $(document).ready(() => {
+                    $("#experience-<%-id%>").find(".more-details-btn").click(() => {
+                        showModal("<%= experience.title %>", [
+                            $($("#experience-modal-<%-id%>").html())
+                        ]);
+                    });
+                });
+            </script>
         </div>
+
     <% }) %>
 </div>
