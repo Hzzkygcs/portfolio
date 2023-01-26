@@ -1,4 +1,7 @@
 let numberOfModal = 0;
+
+const modalFadeAnimationDuration = 110;
+
 function showModal(title, elementsForContent=[], additionalClass=[]){
     const templateElement = $("#main-modal-template");
     const modal = $(templateElement.html());
@@ -19,10 +22,11 @@ function showModal(title, elementsForContent=[], additionalClass=[]){
     }
     modal.find(".close-btn").on('click', () => {
         isClosed.resolve();
-        modal.fadeOut(100, () => modal.remove());
+        modal.fadeOut(modalFadeAnimationDuration, () => modal.remove());
     });
 
-    $("body").append(modal);
+    const body = $("body");
+    modal.hide().appendTo(body).fadeIn(modalFadeAnimationDuration);
     return {
         isClosedPromise: isClosed,
         elementId: id,
