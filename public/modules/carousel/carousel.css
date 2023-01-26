@@ -1,14 +1,65 @@
 .carousel{
-    height: 25rem;
+    height: max(18rem, 40vh);
 }
 
 .carousel .carousel-stack {
     height: 100%;
     width: 100%;
+    overflow: hidden;
 
     display: grid;
-    grid-template-rows: 100%;
-    grid-template-columns: 100%;
+    grid-template-rows: fit-content(100%) 1fr fit-content(100%);
+    grid-template-columns: fit-content(100%) 1fr fit-content(100%);
+}
+
+
+
+.carousel .prev-next-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 2;
+    z-index: 1000;
+    cursor: pointer;
+}
+.carousel .prev-next-container.prev{
+    grid-column: 1;
+}
+.carousel .prev-next-container.next{
+    grid-column: 3;
+}
+
+.carousel .prev-icon, .carousel .next-icon{
+    display: inline-block;
+
+    --size: min(2rem, 4vw);
+    width: var(--size);
+    height: var(--size);
+    margin: var(--size);
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+
+    filter: drop-shadow(0px 0px 3px black)
+    ;  /* stroke */
+}
+
+.carousel .prev-icon{
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel .next-icon{
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+
+
+
+.carousel .carousel-stacked.full{
+    grid-column: 1/-1;
+    grid-row: 1/-1;
 }
 .carousel .carousel-stacked{
     grid-column: 1;
@@ -47,6 +98,13 @@
 }
 
 
+.carousel .content.activating{
+    opacity: 0;
+    animation-delay: 20ms;
+}
+.carousel .content.activating, .carousel .content.deactivating{
+    animation-timing-function: ease-out;
+}
 .carousel .content.activating.left{
     animation-name: carousel-sliding-in-to-left;
     animation-duration: 0.5s;
@@ -65,21 +123,21 @@
 }
 
 @keyframes carousel-sliding-in-to-left {
-    from {transform: translateX(100%);}
-    to {transform: translateX(0);}
+    from {transform: translateX(100%); opacity: 0; }
+    to {transform: translateX(0); opacity: 1; }
 }
 
 @keyframes carousel-sliding-out-to-left {
-    from {transform: translateX(0);}
-    to {transform: translateX(-100%);}
+    from {transform: translateX(0); opacity: 1; }
+    to {transform: translateX(-100%); opacity: 0; }
 }
 
 
 @keyframes carousel-sliding-in-to-right {
-    from {transform: translateX(-100%);}
-    to {transform: translateX(0);}
+    from {transform: translateX(-100%); opacity: 0; }
+    to {transform: translateX(0); opacity: 1; }
 }
 @keyframes carousel-sliding-out-to-right {
-    from {transform: translateX(0);}
-    to {transform: translateX(100%);}
+    from {transform: translateX(0); opacity: 1; }
+    to {transform: translateX(100%); opacity: 0; }
 }

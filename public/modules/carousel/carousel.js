@@ -6,15 +6,23 @@ const onAnimationEndExecutionStackKey = "on-animation-end-execution-stack";
 const currPageKey = "curr-page";
 const contentTemplate = "content-template";
 
-function initializeCarousel(carouselId){
-    const carousel = $("#" + carouselId);
+function initializeCarousel(carousel_carouselId){
+    let carousel = $(carousel_carouselId);
+    if (typeof carousel_carouselId === 'string' || carousel_carouselId instanceof String)
+        carousel = $("#" + carousel_carouselId);
 
     carouselMetadata.setMetadata(carousel, currPageKey, 0);
     carouselMetadata.setMetadata(carousel, contentTemplate,
         $(carousel.find(".content-template").html()).filter("img")
     );
+
     const newPage = carouselDeployNewSlide(carousel, 0);
     carouselAnimateSlideAnimation([], newPage, leftClass);
+
+    carousel.find(".prev-next-container.prev").click(
+        () => carouselChangeSlide(carousel, false));
+    carousel.find(".prev-next-container.next").click(
+        () => carouselChangeSlide(carousel, true));
 }
 
 
@@ -30,8 +38,11 @@ const rightClass = "right";
 
 
 
-function carouselChangeSlide(carouselId, goToNext = true) {
-    const carousel = document.getElementById(carouselId);
+function carouselChangeSlide(carousel_carouselId, goToNext = true) {
+    let carousel = jqueryToNormalObject(carousel_carouselId);
+    if (typeof carousel_carouselId === 'string' || carousel_carouselId instanceof String)
+        carousel = document.getElementById(carousel_carouselId);
+
     const contentLayer = $(carousel).find(".content-layer");
     const currentPages = contentLayer.children();
     const pageTemplate = carouselMetadata.getMetadata(carousel, contentTemplate);

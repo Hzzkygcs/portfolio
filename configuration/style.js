@@ -5,6 +5,7 @@ Ridjky Tegar Perkasa:
     - Paling bagus gradient4.
     - Yang kedua paling bagus gradient1
 Adel:
+    - Gradient 4 lebih bagus daripada gradient 1
     - Gradient 1 lebih bagus daripada gradient 2
 OT:
     - Gradient 1 lebih bagus daripada gradient 2
@@ -27,6 +28,9 @@ Zain:
     - Gradient 1 juga aneh
 Akmal:
     - prefer gradient 1 instead of gradient 4
+Bisma:
+    - kalau ga gradient 1 ya gradient 4
+    - lebih prefer gradient 1 dibandingkan gradient 4
  */
 const gradients = {
     gradient1: [  // immanuel - 1.pdf

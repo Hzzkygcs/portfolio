@@ -1,10 +1,13 @@
-<div id="a"
-     class="carousel">
+<div class="carousel" id="<%- carouselId %>">
     <div class="carousel-stack">
-        <div class="carousel-stacked control-layer">
-
+        <div class="prev-next-container prev">
+            <span class="prev-icon"></span>
         </div>
-        <div class="carousel-stacked content-layer">
+        <div class="prev-next-container next">
+            <span class="next-icon"></span>
+        </div>
+
+        <div class="carousel-stacked content-layer full">
         </div>
         <template class="content-template">
             <img class="content"
@@ -21,8 +24,10 @@
     </div>
 </div>
 
-
-
 <script>
-    initializeCarousel("a");
+    var carouselId = "<%- carouselId %>";
+
+    $(document).ready(() => {
+        initializeCarousel(carouselId);
+    });
 </script>
