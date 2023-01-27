@@ -1,3 +1,5 @@
+const {IEjsElement} = require("./view-models/foundation/IEjsElement");
+
 class Modal{
     /**
      * @param {string} title
@@ -15,6 +17,12 @@ class Modal{
             ret.push(content.toString());
         }
         return ret.join("")
+    }
+
+    static fromEjs(title, ejsTemplatePath, ejsData={}){
+        return new Modal(title, [
+            new IEjsElement(ejsTemplatePath, ejsData)
+        ]);
     }
 }
 

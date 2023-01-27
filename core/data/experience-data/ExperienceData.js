@@ -1,7 +1,8 @@
-const {Experience} = require("../models/Experience");
-const {Modal} = require("../models/Modal");
-const {Carousel} = require("../models/view-models/Carousel");
-const {IHtmlElement} = require("../models/view-models/IHtmlElement");
+const {Experience} = require("../../models/Experience");
+const {Modal} = require("../../models/Modal");
+const {Carousel} = require("../../models/view-models/Carousel");
+const {IHtmlElement} = require("../../models/view-models/foundation/IHtmlElement");
+const {TextElement} = require("../../models/view-models/foundation/TextElement");
 
 
 const workExperiences = [
@@ -9,13 +10,15 @@ const workExperiences = [
         '/img/fexb.png',
         'FExB FEB UI',
         'Backend Engineer',
-        new Modal("FExB FEB UI", [
-            new Carousel([
-                "/img/experiences/fexb/main-page-1.png",
-                "/img/experiences/fexb/main-page-2.png",
-                "/img/experiences/fexb/tickets.png",
-            ])
-        ]),
+        Modal.fromEjs(
+            "FExB FEB UI",
+            "fexb-feb-ui.ejs", {
+                carousel: new Carousel([
+                    "/img/experiences/fexb/main-page-1.png",
+                    "/img/experiences/fexb/main-page-2.png",
+                    "/img/experiences/fexb/tickets.png",
+                ]),
+            }),
     ),
     new Experience(
         '/img/fasilkom ui.png',

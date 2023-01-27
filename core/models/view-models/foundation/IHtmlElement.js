@@ -1,3 +1,4 @@
+const {htmlEncode} = require("./util");
 
 class IHtmlElement{
     tag_name;
@@ -7,7 +8,7 @@ class IHtmlElement{
      * @param {string} tag_name
      * @param {string[]} classes
      * @param {Object} attributes
-     * @param {IHtmlElement[]} children
+     * @param {IElement[]} children
      * @param {string} openingLeftSymbol
      * @param {string} openingRightSymbol
      * @param {string|null} endingLeftSymbol
@@ -29,14 +30,22 @@ class IHtmlElement{
         this.attributes['class'] += `${classes.join(' ')}`;
     }
 
-
-    attributeToString(attr){
-        const attrKey = attr;
-        const attrVal = this.attributes[attr];
-        const attrValEncoded = htmlEncode(attrVal);
-
-        return `${attrKey}="${attrValEncoded}"`;
+    toString(){
+        const open = this.openingToString();
+        const body = this.bodyToString();
+        const close = this.closingToString();
+        return `${open}${body}${close}`;
     }
+
+
+    openingToString(){
+        const leftSymbol = this.openingLeftSymbol;
+        const tag_name = this.tag_name;
+        const attributes = this.attributesToString();
+        const rightSymbol = this.openingRightSymbol;
+        return `${leftSymbol}${tag_name} ${attributes}${rightSymbol}`;
+    }
+
 
     attributesToString(){
         const ret = [];
@@ -46,12 +55,21 @@ class IHtmlElement{
         return ret.join(' ');
     }
 
-    openingToString(){
-        const leftSymbol = this.openingLeftSymbol;
-        const tag_name = this.tag_name;
-        const attributes = this.attributesToString();
-        const rightSymbol = this.openingRightSymbol;
-        return `${leftSymbol}${tag_name} ${attributes}${rightSymbol}`;
+
+    attributeToString(attr){
+        const attrKey = attr;
+        const attrVal = this.attributes[attr];
+        const attrValEncoded = htmlEncode(attrVal);
+
+        return `${attrKey}="${attrValEncoded}"`;
+    }
+
+    bodyToString(){
+        const ret = [];
+        for (const child of this.children) {
+            ret.push(child.toString());
+        }
+        return ret.join("");
     }
 
     closingToString(){
@@ -63,25 +81,7 @@ class IHtmlElement{
         const rightSymbol = this.openingRightSymbol;
         return `${leftSymbol}${tag_name}${rightSymbol}`;
     }
-
-    bodyToString(){
-        const ret = [];
-        for (const child of this.children) {
-            ret.push(child.toString());
-        }
-        return ret.join("");
-    }
-
-    toString(){
-        const open = this.openingToString();
-        const body = this.bodyToString();
-        const close = this.closingToString();
-        return `${open}${body}${close}`;
-    }
 }
 module.exports.IHtmlElement = IHtmlElement;
 
 
-function htmlEncode(string){
-    return string.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
-}

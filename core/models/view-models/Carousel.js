@@ -1,11 +1,11 @@
-const {IEjsElement} = require("./IEjsElement");
+const {IEjsElement} = require("./foundation/IEjsElement");
 let id = 0;
 
 class Carousel extends IEjsElement{
     constructor(imgSources) {
-        super("templates/sections/used-templates/carousel-template.ejs", {
+        super("sections/used-templates/carousel-template.ejs", {
             carouselId: `carousel-${id++}`,
-            imgSources: imgSources
+            imgSources: imgSources,
         });
     }
 }

@@ -1,7 +1,4 @@
 class IElement{
-    constructor() {
-    }
-
     toString(){
         throw new Error("Not implemented");
     }

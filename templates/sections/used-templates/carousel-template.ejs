@@ -11,24 +11,21 @@
         </div>
         <template class="content-template">
             <!-- TODO -->
-            <img class="content"
-                 src="/img/experiences/fexb/main-page-1.png">
-            </img>
-            <img class="content"
-                 src="/img/experiences/fexb/main-page-2.png">
-            </img>
-            <img class="content"
-                 src="/img/experiences/fexb/tickets.png">
-            </img>
+            <% for (const imgSource of imgSources){ %>
+                <img class="content"
+                     src="<%- imgSource %>">
+            <% } %>
         </template>
 
     </div>
 </div>
 
 <script>
-    var carouselId = "<%- carouselId %>";
+    (() => {
+        let carouselId = "<%- carouselId %>";
 
-    $(document).ready(() => {
-        initializeCarousel(carouselId);
-    });
+        $(document).ready(() => {
+            initializeCarousel(carouselId);
+        });
+    })();
 </script>

@@ -1,12 +1,13 @@
 const express = require("express");
-const {experienceGroups} = require("./data/ExperienceData");
-const {skillGroups} = require("./data/SkillData");
-const {myContacts} = require("./data/MyContactsData");
-const {gradients, gradientSpreadPercentage} = require("./configuration/style");
+const {experienceGroups} = require("./core/data/experience-data/ExperienceData");
+const {skillGroups} = require("./core/data/SkillData");
+const {myContacts} = require("./core/data/MyContactsData");
+const {gradients, gradientSpreadPercentage} = require("./core/configuration/style");
+const {viewDirectories} = require("./core/configuration/viewDirectories");
 
 const app = express();
 
-app.set('views', __dirname + '\\templates');
+app.set('views', viewDirectories);
 app.engine('html', require('ejs').renderFile);
 app.use(express.static('public'));
 

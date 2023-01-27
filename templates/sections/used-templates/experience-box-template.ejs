@@ -39,7 +39,7 @@
                 $(document).ready(() => {
                     $("#experience-<%-id%>").find(".more-details-btn").click(() => {
                         showModal("<%= experience.title %>", [
-                            $($("#experience-modal-<%-id%>").html())
+                            $("#experience-modal-<%-id%>").prop('content').cloneNode(true)
                         ]);
                     });
                 });
