@@ -3,7 +3,10 @@ const {Modal} = require("../../models/Modal");
 const {Carousel} = require("../../models/view-models/Carousel");
 const {IHtmlElement} = require("../../models/view-models/foundation/IHtmlElement");
 const {TextElement} = require("../../models/view-models/foundation/TextElement");
+const {AsdosExperience} = require("../AsdosExperience");
 
+
+const experienceCarouselsClass = "experience-carousels";
 
 const workExperiences = [
     new Experience(
@@ -11,9 +14,8 @@ const workExperiences = [
         'FExB FEB UI',
         'Backend Engineer',
         Modal.fromEjs(
-            "FExB FEB UI",
-            "fexb-feb-ui.ejs", {
-                carousel: new Carousel([
+            "FExB FEB UI", "fexb-feb-ui.ejs", {
+                carousel: new Carousel([experienceCarouselsClass], [
                     "/img/experiences/fexb/main-page-1.png",
                     "/img/experiences/fexb/main-page-2.png",
                     "/img/experiences/fexb/tickets.png",
@@ -23,15 +25,21 @@ const workExperiences = [
     new Experience(
         '/img/fasilkom ui.png',
         'Universitas Indonesia',
-        'Teaching Asistant \n Computer Science UI',
-        new Modal("Universitas Indonesia", [
-            new Carousel([
-                "/img/experiences/ristek/about-cp.png",
-                "/img/experiences/ristek/team-cp.png",
-            ]),
-            new IHtmlElement("div", ['a', 'b'], {'data-c': 'd', 'data-e': 'f'},
-                [])
-        ]),
+        'Teaching Assistant \n Computer Science UI',
+        Modal.fromEjs(
+            "Teaching Assistant at CS UI", "universitas-indonesia.ejs",
+            {
+                asdosExperiences: [
+                    new AsdosExperience("Jul 2021", "Jan 2022",
+                        "Programming Foundations 1", "1 - 2021/2022"),
+                    new AsdosExperience("Jan 2022", "Jun 2022",
+                        "Programming Foundations 2", "2 - 2021/2022"),
+                    new AsdosExperience("Aug 2022", "Jan 2023",
+                        "Data Structures and Algorithms", "1 - 2022/2023"),
+                    new AsdosExperience("Jan 2023", "Present",
+                        "Advanced Programming", "2 - 2022/2023"),
+                ].reverse()
+            }).debugModeOn(),
     ),
 ];
 const organizationExperiences = [
@@ -40,7 +48,7 @@ const organizationExperiences = [
         'Ristek',
         'Member and Lead of Competitive Programming',
         new Modal("Ristek", [
-                new Carousel([
+                new Carousel([experienceCarouselsClass], [
                     "/img/experiences/ristek/about-cp.png",
                     "/img/experiences/ristek/team-cp.png",
                 ])

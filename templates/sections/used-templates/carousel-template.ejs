@@ -1,4 +1,6 @@
-<div class="carousel" id="<%- carouselId %>">
+<% if (locals.carouselClasses == null) carouselClasses = []; %>
+
+<div class="carousel <%- carouselClasses.join(" ") %>" id="<%- carouselId %>">
     <div class="carousel-stack">
         <div class="prev-next-container prev">
             <span class="prev-icon"></span>

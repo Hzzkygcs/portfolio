@@ -8,6 +8,7 @@ class Modal{
     constructor(title, modalContent=[]) {
         this.title = title;
         this.modalContent = modalContent;
+        this.debugMode = false;  // debugMode true means the modal dialog will automatically be opened on page load
     }
 
     toString(){
@@ -17,6 +18,11 @@ class Modal{
             ret.push(content.toString());
         }
         return ret.join("")
+    }
+
+    debugModeOn(){
+        this.debugMode = true;
+        return this;
     }
 
     static fromEjs(title, ejsTemplatePath, ejsData={}){

@@ -42,6 +42,13 @@
                             $("#experience-modal-<%-id%>").prop('content').cloneNode(true)
                         ]);
                     });
+
+                    <%# Automatically open modal dialog box on page-load if debugMode activated %>
+                    <% if (experience.modalOnClick.debugMode){ %>
+                    showModal("<%= experience.modalOnClick.title %>", [
+                        $("#experience-modal-<%-id%>").prop('content').cloneNode(true)
+                    ]);
+                    <% } %>
                 });
             </script>
         </div>

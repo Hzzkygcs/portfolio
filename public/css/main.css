@@ -20,6 +20,22 @@ body, html{
     grid-template-rows: repeat(5, fit-content(100%));
 }
 
+
+.link{
+    color: var(--tosca);
+    transition: filter 200ms;
+    filter: brightness(95%);
+}
+.link:hover{
+    filter: brightness(130%);
+}
+
+.highlighted{
+    color: #7ecdbd;
+}
+
+
+
 .content-section-container.first-section{
     margin-top: 0;
 }
