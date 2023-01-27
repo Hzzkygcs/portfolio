@@ -1,3 +1,7 @@
+body.on-modal-opened{
+    overflow: hidden;
+}
+
 .modal-container{
     position: fixed;
     z-index: 5;
