@@ -81,7 +81,7 @@
     padding: 0.2rem;
 
     filter: brightness(100%);
-    transition: filter 200ms;
+    transition: filter 350ms;
 }
 .experience-div .more-details-btn:hover{
     filter: brightness(115%);
