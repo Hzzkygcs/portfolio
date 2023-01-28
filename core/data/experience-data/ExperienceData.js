@@ -3,7 +3,7 @@ const {Modal} = require("../../models/Modal");
 const {Carousel} = require("../../models/view-models/Carousel");
 const {IHtmlElement} = require("../../models/view-models/foundation/IHtmlElement");
 const {TextElement} = require("../../models/view-models/foundation/TextElement");
-const {AsdosExperience} = require("../AsdosExperience");
+const {AsdosExperience} = require("../../models/AsdosExperience");
 
 
 const experienceCarouselsClass = "experience-carousels";
