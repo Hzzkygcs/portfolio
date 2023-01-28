@@ -47,7 +47,7 @@ const organizationExperiences = [
         '/img/ristek.jpg',
         'Ristek',
         'Member and Lead of Competitive Programming',
-        Modal.fromEjs("Ristek", "ristek-experience-modal.ejs", {
+        Modal.fromEjs("Ristek Universitas Indonesia", "ristek-experience-modal.ejs", {
             carousel: new Carousel([experienceCarouselsClass], [
                 "/img/experiences/ristek/about-cp.png",
                 "/img/experiences/ristek/team-cp.png",
