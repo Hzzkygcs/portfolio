@@ -39,7 +39,7 @@ const workExperiences = [
                     new AsdosExperience("Jan 2023", "Present",
                         "Advanced Programming", "2 - 2022/2023"),
                 ].reverse()
-            }).debugModeOn(),
+            }),
     ),
 ];
 const organizationExperiences = [
@@ -47,12 +47,12 @@ const organizationExperiences = [
         '/img/ristek.jpg',
         'Ristek',
         'Member and Lead of Competitive Programming',
-        new Modal("Ristek", [
-                new Carousel([experienceCarouselsClass], [
-                    "/img/experiences/ristek/about-cp.png",
-                    "/img/experiences/ristek/team-cp.png",
-                ])
-        ]),
+        Modal.fromEjs("Ristek", "ristek-experience-modal.ejs", {
+            carousel: new Carousel([experienceCarouselsClass], [
+                "/img/experiences/ristek/about-cp.png",
+                "/img/experiences/ristek/team-cp.png",
+            ]),
+        }).debugModeOn(),
     ),
 
 ];

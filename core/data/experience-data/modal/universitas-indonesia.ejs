@@ -1,12 +1,14 @@
 
-<div class="p-2 pt-0">
+<div class="p-2 pt-0
+        grid grid-cols-1 sm:grid-cols-2 justify-evenly">
     <% for (const asdosExperience of asdosExperiences){ %>
-        <div class="pb-5">
+        <div class="pb-5 w-fit">
             <span class="text-xl highlighted">
                 <%- asdosExperience.courseName %>
             </span>
 
-            <div class="experience-detail-table cols-2-fit-content pt-1 pl-5">
+            <div class="experience-detail-table cols-2-fit-content p
+                        t-1 pl-5">
                 <span>
                     Term
                 </span>
@@ -31,5 +33,6 @@
                 </span>
             </div>
         </div>
+
     <% } %>
 </div>
