@@ -52,7 +52,7 @@ const organizationExperiences = [
                 "/img/experiences/ristek/about-cp.png",
                 "/img/experiences/ristek/team-cp.png",
             ]),
-        }).debugModeOn(),
+        }),
     ),
 
 ];
