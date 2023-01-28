@@ -37,17 +37,17 @@
 
             <script>
                 $(document).ready(() => {
-                    $("#experience-<%-id%>").find(".more-details-btn").click(() => {
-                        showModal("<%= experience.title %>", [
+                    const onBtnClick = () => {
+                        showModal("<%= experience.modalOnClick.title %>", [
                             $("#experience-modal-<%-id%>").prop('content').cloneNode(true)
                         ]);
-                    });
+                    };
+
+                    $("#experience-<%-id%>").find(".more-details-btn").click(onBtnClick);
 
                     <%# Automatically open modal dialog box on page-load if debugMode activated %>
                     <% if (experience.modalOnClick.debugMode){ %>
-                    showModal("<%= experience.modalOnClick.title %>", [
-                        $("#experience-modal-<%-id%>").prop('content').cloneNode(true)
-                    ]);
+                        onBtnClick();
                     <% } %>
                 });
             </script>
