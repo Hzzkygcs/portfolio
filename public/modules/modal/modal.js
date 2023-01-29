@@ -5,8 +5,9 @@ const modalFadeAnimationDuration = 110;
 
 function showModal(title, contentDomElements=[], additionalClasses=[],
                    modalParent=null, urlHashId=null){
-    if (urlHashId != null)
-        location.hash =  urlHashId;
+    if (urlHashId != null) {
+        setUrlHash('#' + urlHashId);
+    }
     modalParent = (modalParent == null)? $("body") : modalParent;
     const modal = instantiateNewModalDomElement();
     addClassesToModal(modal, additionalClasses);
@@ -26,6 +27,20 @@ function showModal(title, contentDomElements=[], additionalClasses=[],
         isClosedPromise: isClosed,
         elementId: id,
     };
+}
+
+function setUrlHash(value) {
+    if (value === '')
+        value = '!';
+
+    if(history.pushState) {
+        if (!value.startsWith("#"))
+            value = "#" + value;
+        history.pushState(null, null, value);
+        return;
+    }
+    location.hash = value;
+
 }
 
 function instantiateNewModalDomElement() {
@@ -59,7 +74,7 @@ function defineModalCloseEventHandler(modal, isClosed, urlHashId){
         modal.fadeOut(modalFadeAnimationDuration, () => modal.remove());
 
         if (urlHashId != null)
-            location.hash = '';
+            setUrlHash('');
     };
 
     modal.find(".close-btn").on('click', onClose);
