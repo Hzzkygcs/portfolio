@@ -32,7 +32,7 @@ Bisma:
     - kalau ga gradient 1 ya gradient 4
     - lebih prefer gradient 1 dibandingkan gradient 4
  */
-const gradients = {
+module.exports.gradients =  {
     gradient1: [  // immanuel - 1.pdf
         "#1C1F2F",
         "#23273B",
@@ -62,7 +62,7 @@ const gradients = {
         "#1d213f",
     ],
 }
-module.exports.gradients = gradients;
 
-const gradientSpreadPercentage = 10;
-module.exports.gradientSpreadPercentage = gradientSpreadPercentage;
+
+module.exports.gradientSpreadPercentage = 10;
+
