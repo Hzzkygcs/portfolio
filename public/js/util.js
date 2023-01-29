@@ -30,6 +30,13 @@ function gaussianRandom(mean=0, stdev=1) {
 }
 
 
+function getUrlHashValue(){
+    const locationHash = location.hash;  // #blabla?query1=value1&query2=value2
+    const hashtagSymbolRemoved = locationHash.substring(1);
+    return hashtagSymbolRemoved.split("?")[0];  // remove url queries
+}
+
+
 function minimumAbsolute(x, y){
     return Math.min(
         Math.abs(x),

@@ -37,13 +37,17 @@
 
             <script>
                 $(document).ready(() => {
+                    const urlHashId = "experience-<%- experience.getUrlHashId() %>"
                     const onBtnClick = () => {
                         showModal("<%= experience.modalOnClick.title %>", [
                             $("#experience-modal-<%-id%>").prop('content').cloneNode(true)
-                        ]);
+                        ], [], null, urlHashId);
                     };
 
                     $("#experience-<%-id%>").find(".more-details-btn").click(onBtnClick);
+
+                    if (urlHashId === getUrlHashValue())
+                        onBtnClick();
 
                     <%# Automatically open modal dialog box on page-load if debugMode activated %>
                     <% if (experience.modalOnClick.debugMode){ %>

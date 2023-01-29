@@ -1,3 +1,4 @@
+const {urlencoded} = require("express");
 
 class Experience{
     img_src;
@@ -15,6 +16,11 @@ class Experience{
         this.title = title;
         this.detail = detail.replace("\n", "<br>");
         this.modalOnClick = modalOnClick;
+    }
+
+    getUrlHashId(){
+        const partiallyEncodedTitle = this.title.replaceAll(" ", '-').toLowerCase();
+        return encodeURIComponent(partiallyEncodedTitle);
     }
 }
 

@@ -3,20 +3,25 @@ let numberOfModal = 0;
 const modalFadeAnimationDuration = 110;
 
 
-function showModal(title, contentDomElements=[], additionalClasses=[], modalParent=null){
+function showModal(title, contentDomElements=[], additionalClasses=[],
+                   modalParent=null, urlHashId=null){
+    if (urlHashId != null)
+        location.hash =  urlHashId;
     modalParent = (modalParent == null)? $("body") : modalParent;
     const modal = instantiateNewModalDomElement();
     addClassesToModal(modal, additionalClasses);
 
-    const id = "modal-" + numberOfModal;
+    const id = "modal-" + numberOfModal++;
     modal.attr('id', id);
 
     modal.find(".modal-title").html(title);
     appendContentsToModal(modal, contentDomElements)
     const isClosed = new Deferred();
-    defineModalCloseEventHandler(modal, isClosed);
+
+    defineModalCloseEventHandler(modal, isClosed, urlHashId);
     modal.hide().appendTo(modalParent).fadeIn(modalFadeAnimationDuration);
     modalParent.addClass("on-modal-opened");
+
     return {
         isClosedPromise: isClosed,
         elementId: id,
@@ -25,8 +30,7 @@ function showModal(title, contentDomElements=[], additionalClasses=[], modalPare
 
 function instantiateNewModalDomElement() {
     const templateElement = $("#main-modal-template");
-    const modal = $(templateElement.html())
-    return modal;
+    return $(templateElement.html());
 }
 
 function addClassesToModal(modal, classes){
@@ -48,11 +52,14 @@ function appendContentsToModal(modal, contentDomElements){
  * @param modal
  * @param {Deferred} isClosed
  */
-function defineModalCloseEventHandler(modal, isClosed){
+function defineModalCloseEventHandler(modal, isClosed, urlHashId){
     const onClose = () => {
         isClosed.resolve();
         $("body").removeClass("on-modal-opened");
         modal.fadeOut(modalFadeAnimationDuration, () => modal.remove());
+
+        if (urlHashId != null)
+            location.hash = '';
     };
 
     modal.find(".close-btn").on('click', onClose);
