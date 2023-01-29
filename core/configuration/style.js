@@ -65,4 +65,5 @@ module.exports.gradients =  {
 
 
 module.exports.gradientSpreadPercentage = 10;
+module.exports.fontFamily = ""; // null or a name of css
 
