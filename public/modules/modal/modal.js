@@ -25,7 +25,8 @@ function showModal(title, contentDomElements=[], additionalClasses=[], modalPare
 
 function instantiateNewModalDomElement() {
     const templateElement = $("#main-modal-template");
-    return $(templateElement.html());
+    const modal = $(templateElement.html())
+    return modal;
 }
 
 function addClassesToModal(modal, classes){
@@ -48,9 +49,18 @@ function appendContentsToModal(modal, contentDomElements){
  * @param {Deferred} isClosed
  */
 function defineModalCloseEventHandler(modal, isClosed){
-    modal.find(".close-btn").on('click', () => {
+    const onClose = () => {
         isClosed.resolve();
         $("body").removeClass("on-modal-opened");
         modal.fadeOut(modalFadeAnimationDuration, () => modal.remove());
+    };
+
+    modal.find(".close-btn").on('click', onClose);
+
+    console.assert(modal.hasClass("modal-container"))
+    modal.on('click', (e) => {  // if clicked at the outside the modal
+        if (e.target !== modal[0])
+            return;
+        onClose();
     });
 }
