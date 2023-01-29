@@ -27,7 +27,7 @@ const workExperiences = [
         'Universitas Indonesia',
         'Teaching Assistant \n Computer Science UI',
         Modal.fromEjs(
-            "Teaching Assistant at CS UI", "universitas-indonesia.ejs",
+            "Computer Science UI", "universitas-indonesia.ejs",
             {
                 asdosExperiences: [
                     new AsdosExperience("Jul 2021", "Jan 2022",
