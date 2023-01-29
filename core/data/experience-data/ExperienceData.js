@@ -51,6 +51,7 @@ const organizationExperiences = [
             carousel: new Carousel([experienceCarouselsClass], [
                 "/img/experiences/ristek/about-cp.png",
                 "/img/experiences/ristek/team-cp.png",
+                "/img/experiences/ristek/lomba-compfest.jpg"
             ]),
         }),
     ),
