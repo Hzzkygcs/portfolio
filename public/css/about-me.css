@@ -1,0 +1,11 @@
+.side-by-side-if-wide-enough {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .side-by-side-if-wide-enough {
+        /*grid-template-columns: fit-content(100%) fit-content(100%);*/
+        grid-template-columns: 1fr minmax(40%, 70%);
+    }
+}
