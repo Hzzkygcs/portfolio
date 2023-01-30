@@ -2,35 +2,34 @@ const {IEjsElement} = require("./foundation/IEjsElement");
 let id = 0;
 
 class Carousel extends IEjsElement{
-
     /**
      * @param {string[]} classess
-     * @param {(string|object)[]} slidesImagePathAndExplanation list of (string or {src, explanation})
+     * @param {(string|object)[]} slidesImagePathAndDetailText list of (string or {src, detailText})
      */
-    constructor(classess, slidesImagePathAndExplanation) {
+    constructor(classess, slidesImagePathAndDetailText) {
         super("sections/used-templates/carousel-template.ejs", {
             carouselId: `carousel-${id++}`,
             carouselClasses: classess,
             imgSources: null,
-            explanations: null,
+            detailTexts: null,
         });
-        this._splitSlidesImagePathAndExplanation(slidesImagePathAndExplanation);
+        this._splitSlidesImagePathAndDetailText(slidesImagePathAndDetailText);
     }
 
-    _splitSlidesImagePathAndExplanation(slidesImagePathAndExplanation){
+    _splitSlidesImagePathAndDetailText(slidesImagePathAndDetailText){
         const imgSources = [];
-        const explanations = [];
-        for (const slideData of slidesImagePathAndExplanation) {
+        const detailTexts = [];
+        for (const slideData of slidesImagePathAndDetailText) {
             if (typeof slideData === 'string' || slideData instanceof String){
                 imgSources.push(slideData);
-                explanations.push(null);
+                detailTexts.push(null);
                 continue;
             }
             imgSources.push(slideData['src']);
-            explanations.push(slideData['explanation']);
+            detailTexts.push(slideData['detailText']);
         }
-        this.data.imgSources = imgSources;
-        this.data.explanations = explanations;
+        this.setData('imgSources', imgSources);
+        this.setData('detailTexts', detailTexts);
     }
 }
 module.exports.Carousel = Carousel;

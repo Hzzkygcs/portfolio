@@ -49,9 +49,18 @@ const organizationExperiences = [
         'Member and Lead of Competitive Programming',
         Modal.fromEjs("Ristek Universitas Indonesia", "ristek-experience-modal.ejs", {
             carousel: new Carousel([experienceCarouselsClass], [
-                "/img/experiences/ristek/about-cp.png",
-                "/img/experiences/ristek/team-cp.png",
-                "/img/experiences/ristek/lomba-compfest.jpg"
+                {
+                    src: "/img/experiences/ristek/about-cp.png",
+                    detailText: "carousel slide 1",
+                },
+                {
+                    src: "/img/experiences/ristek/team-cp.png",
+                    detailText: "carousel slide 2",
+                },
+                {
+                    src: "/img/experiences/ristek/lomba-compfest.jpg",
+                    detailText: "carousel slide 3",
+                },
             ]),
         }),
     ),

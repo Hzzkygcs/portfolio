@@ -9,6 +9,15 @@
 }
 
 
+.carousel .detail{
+    grid-row: 3;
+    grid-column: 2;
+    text-align: center;
+
+
+    text-shadow: 0 0 0.5rem #000000;
+    z-index: 1000;
+}
 
 .carousel .prev-next-container {
     display: flex;

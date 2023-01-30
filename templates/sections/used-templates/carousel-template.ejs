@@ -8,6 +8,9 @@
         <div class="prev-next-container next">
             <span class="next-icon"></span>
         </div>
+        <div class="detail">
+
+        </div>
 
         <div class="carousel-stacked content-layer full">
         </div>
@@ -17,6 +20,9 @@
                 <img class="content"
                      src="<%- imgSource %>">
             <% } %>
+        </template>
+        <template class="detail-text-template">
+            <%- JSON.stringify(detailTexts) %>
         </template>
 
     </div>

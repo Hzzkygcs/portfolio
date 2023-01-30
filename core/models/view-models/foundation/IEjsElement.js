@@ -18,6 +18,10 @@ class IEjsElement extends IElement{
         this.ejsViewDirectories = ejsViewDirectories;
     }
 
+    setData(key, value){
+        this.data[key] = value;
+    }
+
     toString() {
         const filePath = getEjsFilePath(this.ejsFileName, this.ejsViewDirectories)
         const file = fs.readFileSync(filePath, 'ascii');

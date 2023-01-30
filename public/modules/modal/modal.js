@@ -66,6 +66,7 @@ function appendContentsToModal(modal, contentDomElements){
 /**
  * @param modal
  * @param {Deferred} isClosed
+ * @param urlHashId
  */
 function defineModalCloseEventHandler(modal, isClosed, urlHashId){
     const onClose = () => {

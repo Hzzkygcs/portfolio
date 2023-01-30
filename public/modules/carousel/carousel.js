@@ -18,6 +18,7 @@ function initializeCarousel(carousel_carouselId){
 
     const newPage = carouselDeployNewSlide(carousel, 0);
     carouselAnimateSlideAnimation([], newPage, leftClass);
+    carouselSetDetailText(carousel, 0);
 
     carousel.find(".prev-next-container.prev").click(
         () => carouselChangeSlide(carousel, false));
@@ -43,22 +44,36 @@ function carouselChangeSlide(carousel_carouselId, goToNext = true) {
     if (typeof carousel_carouselId === 'string' || carousel_carouselId instanceof String)
         carousel = document.getElementById(carousel_carouselId);
 
-    const contentLayer = $(carousel).find(".content-layer");
-    const currentPages = contentLayer.children();
     const pageTemplate = carouselMetadata.getMetadata(carousel, contentTemplate);
-    const slideDirectionClass = goToNext ? leftClass : rightClass;
-
-    const pageIncrement = goToNext? 1 : -1;
     const currPage = carouselMetadata.getMetadata(carousel, "curr-page");
+    const pageIncrement = goToNext? 1 : -1;
     let nextPage = (currPage + pageIncrement) % pageTemplate.length;
     nextPage = (pageTemplate.length + nextPage) % pageTemplate.length;  // handle negative number modulo by positive
     carouselMetadata.setMetadata(carousel, currPageKey, nextPage);
+    carouselSetDetailText(carousel, nextPage);
 
+    const contentLayer = $(carousel).find(".content-layer");
+    const currentPages = contentLayer.children();
     const nextPageEl = carouselDeployNewSlide(carousel, nextPage)
+    const slideDirectionClass = goToNext ? leftClass : rightClass;
     carouselAnimateSlideAnimation([getLastItem(currentPages)], nextPageEl, slideDirectionClass)
 }
 function getLastItem(arr){
     return arr[arr.length - 1];
+}
+
+function carouselSetDetailText(carousel, page) {
+    carousel = $(carousel);
+
+    const detailTexts = JSON.parse(
+        carousel.find(".detail-text-template").html()
+    );
+    const currDetailText = detailTexts[page];
+    const detailElement = carousel.find(".detail");
+    const animationDuration = 120;
+    detailElement.fadeOut(animationDuration, () => {
+        detailElement.text(currDetailText).fadeIn(animationDuration);
+    })
 }
 
 function carouselSetUpSlide(slideEl){
