@@ -49,8 +49,10 @@ body, html{
     color: white;
     grid-column: 1;
 
-    margin-top: 5rem;
-    margin-bottom: 3rem;
+    --margin-top: 5rem;
+    --margin-bottom:  3rem;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
 }
 
 .ending-section{
