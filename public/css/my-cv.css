@@ -1,0 +1,39 @@
+.open-my-cv-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding: 0.4rem 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+    /*background-color: #0fa4c2;*/
+    background-color: var(--default-box-button-color);
+    filter: brightness(100%);
+    transition: filter 350ms;
+}
+.open-my-cv-btn:hover{
+    filter: brightness(115%);
+}
+
+
+.open-my-cv-btn .cv-thumbnail-box {
+    --size: 1.3rem;
+    height: var(--size);
+    width: var(--size);
+
+
+    /*
+    convert black SVG into #ffffff.
+    see https://codepen.io/sosuke/pen/Pjoqqp and https://stackoverflow.com/a/53336754/7069108
+    */
+    --colouring-filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(76deg) brightness(106%);
+
+    background-image: url('/img/misc/document-svgrepo-com.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    filter: var(--colouring-filter);
+
+}

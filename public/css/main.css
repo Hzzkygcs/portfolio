@@ -15,14 +15,11 @@ body, html{
     background: linear-gradient(var(--main-background-grad-start) 0%,
                 var(--main-background-grad-end) 100%);
     color: var(--main-background-grad-start);
-}
 
-.stack{
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: repeat(5, fit-content(100%));
+    grid-template-rows: repeat(var(--num-of-each-section), fit-content(100%));
 }
-
 
 .link{
     color: var(--tosca);

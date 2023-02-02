@@ -3,7 +3,7 @@
     max-width: 90vw;
 
     grid-template-columns: fit-content(100%) fit-content(100%);
-    grid-gap: 2rem 2rem;
+    grid-gap: 1rem 2rem;
     width: fit-content;
 
     --skill-thumbnail-box-margin: 0.5rem;

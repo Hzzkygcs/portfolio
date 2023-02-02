@@ -1,6 +1,6 @@
 :root {
-    --main-background-grad-start: #090a0f;
-    --main-background-grad-end: #1b2735;
+    --main-background-grad-start: #090a0f;  /* TODO rename */
+    --main-background-grad-end: #1b2735;  /* TODO rename */
     --tosca: #0fa4c2;
 
     --default-box-background-color: #373D5C;

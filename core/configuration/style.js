@@ -57,7 +57,8 @@ module.exports.gradients =  {
     gradient4: [  // Immanuel - 4.pdf
         "#101323",
         "#13162a",
-        "#161a31",
+        "#15192d",
+        "#181c34",
         "#1a1e38",
         "#1d213f",
     ],
