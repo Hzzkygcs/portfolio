@@ -1,20 +1,43 @@
 .skill-table {
     display: grid;
     max-width: 90vw;
-    grid-template-columns: auto fit-content(100%);
-    grid-gap: 0.75rem;
-    width: 52rem;
+
+    grid-template-columns: fit-content(100%) fit-content(100%);
+    grid-gap: 2rem 2rem;
+    width: fit-content;
+
+    --skill-thumbnail-box-margin: 0.5rem;
+    --skill-thumbnail-box-size: 5rem;
+}
+
+.skill-table .skill-group-name{
+    display: flex;
+    align-items: start;
+}
+.skill-table .skill-group-name div{
+    margin: var(--skill-thumbnail-box-margin) 0;
+    min-height: var(--skill-thumbnail-box-size);
+    display: flex;
+    align-items: center;
 }
 
 .skill-thumbnail-box{
     display: block;
     cursor: pointer;
 
-    margin: 0.5rem;
-    border-radius: 1rem;
-    width: 5rem;
-    height: 5rem;
+    margin: var(--skill-thumbnail-box-margin);
+    border-radius: 100000000rem;
+    width: var(--skill-thumbnail-box-size);
+    height: var(--skill-thumbnail-box-size);
+    background-color: #C7DAE5;
+}
+.skill-thumbnail-box *{
+    height: 100%;
+    width: 100%;
+    filter: brightness(96%) contrast(96%) drop-shadow(1px 1px 0 gray) ;
+
     background-image: var(--img-url);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 70%;
+    background-position: center;
 }

@@ -8,12 +8,18 @@
         <% Object.keys(skillGroups).forEach(function(skillGroupName){ %>
             <% var skills = skillGroups[skillGroupName]; %>
 
-            <div><%- skillGroupName %></div>
+            <div class="skill-group-name">
+                <div>
+                    <%- skillGroupName %>
+                </div>
+            </div>
             <div class="flex flex-row flex-wrap items-center justify-left">
                 <% skills.forEach(function (skill){ %>
                     <div>
-                        <div class="skill-thumbnail-box"
-                             style="--img-url: url('<%= skill.img_src %>');"></div>
+                        <div class="skill-thumbnail-box">
+                            <div style="--img-url: url('<%= skill.img_src %>');">
+                            </div>
+                        </div>
 
                         <template class="skill-tip-content">
                             <%- skill.tooltip_text %>

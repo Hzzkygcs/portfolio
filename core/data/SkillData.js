@@ -2,7 +2,7 @@ const {Skill} = require("../models/Skill");
 
 const programmingLanguages = [
     new Skill(
-        "/img/skills/python.jpg",
+        "/img/skills/python.png",
         "https://python.org/",
         "Python",
     ),
@@ -26,11 +26,11 @@ const programmingLanguages = [
         "https://kotlinlang.org/",
         "Kotlin",
     ),
-    new Skill(
-        "/img/skills/dart.png",
-        "https://dart.dev/",
-        "Dart",
-    ),
+    // new Skill(
+    //     "/img/skills/dart.png",
+    //     "https://dart.dev/",
+    //     "Dart",
+    // ),
 ];
 const frameworks = [
     new Skill(
@@ -39,12 +39,12 @@ const frameworks = [
         "Node JS - Javascript",
     ),
     new Skill(
-        "/img/skills/django.png",
+        "/img/skills/django.svg",
         "https://www.djangoproject.com/",
         "Django - Python",
     ),
     new Skill(
-        "/img/skills/spring-boot.png",
+        "/img/skills/spring-boot.svg",
         "https://spring.io/projects/spring-boot",
         "Spring Boot - Java",
     ),
