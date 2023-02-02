@@ -88,7 +88,7 @@ function createRandomNormalStar(z, scene){
 
     const size = sizeForMinZ * (minZ / z);
     let dataDepth = dataDepthForMinZ * (minZ / z) ** 1.5 ;
-    dataDepth = dataDepth + getRandomInt(-150, 150) / 10_000;
+    dataDepth = dataDepth * getRandomInt(100, 105) / getRandomInt(100, 105);
 
     createNewNormalStar(x, y, dataDepth, size, "bisque", scene);
 }
