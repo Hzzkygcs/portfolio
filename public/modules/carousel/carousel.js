@@ -4,6 +4,7 @@ const isAnimationRunningKey = "is-animation-running";
 const onAnimationEndExecutionStackKey = "on-animation-end-execution-stack";
 
 const currPageKey = "curr-page";
+const detailTextElementsKey = "detail-text-elements";
 const contentTemplate = "content-template";
 
 function initializeCarousel(carousel_carouselId){
@@ -18,14 +19,47 @@ function initializeCarousel(carousel_carouselId){
 
     const newPage = carouselDeployNewSlide(carousel, 0);
     carouselAnimateSlideAnimation([], newPage, leftClass);
+    carouselInitializeDetailTexts(carousel);
     carouselSetDetailText(carousel, 0);
+    carouselAddNoDetailClassIfAllDetailsAreNull(carousel);
 
     carousel.find(".prev-next-container.prev").click(
         () => carouselChangeSlide(carousel, false));
     carousel.find(".prev-next-container.next").click(
         () => carouselChangeSlide(carousel, true));
 }
+function carouselInitializeDetailTexts(carousel) {
+    const details = carouselGetDetailTextsArray(carousel);
+    const detailContainer = $(carousel).find(".detail");
+    const detailElements = [];
 
+    for (const detail of details) {
+        const span = $("<span />");
+        if (detail != null) {
+            span.text(detail);
+        }
+        span.css('opacity', 0);
+        span.addClass("stack-item");
+
+        detailElements.push(span[0]);
+        detailContainer.append(span);
+    }
+    carouselMetadata.setMetadata(carousel, detailTextElementsKey, $(detailElements));
+}
+function carouselAddNoDetailClassIfAllDetailsAreNull(carousel){
+    const details = carouselGetDetailTextsArray(carousel);
+    for (const detail of details) {
+        if (detail != null)
+            return;
+    }
+    $(carousel).addClass("no-detail");
+}
+
+function carouselGetDetailTextsArray(carousel){
+    return JSON.parse(
+        carousel.find(".detail-text-template").html()
+    );
+}
 
 
 
@@ -65,14 +99,14 @@ function getLastItem(arr){
 function carouselSetDetailText(carousel, page) {
     carousel = $(carousel);
 
-    const detailTexts = JSON.parse(
-        carousel.find(".detail-text-template").html()
-    );
-    const currDetailText = detailTexts[page];
-    const detailElement = carousel.find(".detail");
+    const detailTextElements = carouselMetadata.getMetadata(carousel, detailTextElementsKey);
+    const currDetailText = $(detailTextElements[page]);
     const animationDuration = 120;
-    detailElement.fadeOut(animationDuration, () => {
-        detailElement.text(currDetailText).fadeIn(animationDuration);
+
+    detailTextElements.animate({opacity: 0}, animationDuration, () => {
+        currDetailText.animate({opacity: 1}, animationDuration, () => {
+            detailTextElements.not(currDetailText).css('opacity', 0);
+        });
     })
 }
 
@@ -156,7 +190,7 @@ function addCodeExecutionStackOnAnimationFinished(
     }
 }
 function executeOnAnimationFinished(funcStack){
-    if (funcStack.length == 0)
+    if (funcStack.length === 0)
         return;
 
     let func = funcStack.pop();
