@@ -112,14 +112,10 @@ $(document).ready(() => {
         createRandomNormalStar(getRandomInt(200, MAX_Z), scene);
     }
 
-
-    const parallaxInstance = new Parallax(scene, {
-        relativeInput: false
-    }, true);
-    window.parallaxInstance = parallaxInstance;
-
-    if (runOnMobileAndTablet()){
-        scrollParallax(parallaxInstance);
+    const allStars = $(scene).find("*[data-depth]");
+    for (const star of allStars) {
+        const jqueryStar = $(star);
+        jqueryStar.css("--data-depth", jqueryStar.attr("data-depth"));
     }
 
 });
