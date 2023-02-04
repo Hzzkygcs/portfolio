@@ -53,7 +53,7 @@ const organizationExperiences = [
                 "/img/experiences/ristek/team-cp.png",
                 {
                     src: "/img/experiences/ristek/lomba-compfest.jpg",
-                    detailText: "Finalist SCPC Compfest - one of several competitions participated by Ristek ",
+                    detailText: "SCPC Compfest finalist - one of several competitions participated by Ristek ",
                 },
             ]),
         }),
