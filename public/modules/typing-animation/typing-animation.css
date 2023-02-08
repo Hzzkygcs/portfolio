@@ -1,3 +1,13 @@
+.set-equal-text-vertical-position{
+    /* idk why but this fix the issue of different vertical position between those two  */
+    vertical-align: bottom;
+
+}
+
+.min-height{
+    min-height: 10rem;
+}
+
 .typing-animation.not-ready > *[data-order]{
     display: none;
 }
@@ -5,3 +15,8 @@
 .no-js .hidden-on-js-not-loaded {
     display: none;
 }
+
+.typing-animation > *[data-order] > *{
+    vertical-align: bottom;
+}
+

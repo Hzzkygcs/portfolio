@@ -38,12 +38,17 @@ body, html{
     font-weight: 900;
 }
 
+.inline-stack-layout{
+    display: inline-grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
 .stack-layout {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 }
-.stack-layout > .stack-item{
+.stack-layout > .stack-item, .inline-stack-layout > .stack-item{
     grid-row: 1;
     grid-column: 1;
 }

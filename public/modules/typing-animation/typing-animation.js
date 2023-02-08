@@ -1,6 +1,8 @@
 
 $(document).ready(() => {
     const typingAnimationElements = $(".typing-animation");
+    typingAnimationElements.addClass("inline-stack-layout");
+    typingAnimationElements.children().addClass("stack-item");
 
     for (const typingAnimationElement of typingAnimationElements) {
         const typingAnimation = new TypingAnimation(typingAnimationElement);
@@ -25,10 +27,10 @@ class TypingAnimation{
     element;
     currentIndex;
 
-    beforeHidingDelayDuration = 0; // ms
-    afterHidingDelayDuration = 0; // ms
-    poppingUpDurationForEachLetter = 80;  // ms
-    hidingDurationForEachLetter = 50;
+    beforeHidingDelayDuration = 1500; // ms
+    afterHidingDelayDuration = 100; // ms
+    poppingUpDurationForEachLetter = 120;  // ms
+    hidingDurationForEachLetter = 80;
 
     constructor(element) {
         element = $(element);
@@ -47,7 +49,7 @@ class TypingAnimation{
     convertLettersToSpans(element){
         element = $(element);
 
-        const text = element.text();
+        const text = element.text().trim();
         element.empty();
 
         for (const char of text) {
@@ -69,9 +71,10 @@ class TypingAnimation{
 
 
     onCurrentIterationStarted(){
-        const deferred = this.showElement(this.getCurrentElement());
-        deferred.promise.then(() => {
-            this.onCurrentIterationFinished();
+        console.log("start");
+        const {promise} = this.showElement(this.getCurrentElement());
+        promise.promise.then(() => {
+            this.onCurrentIterationDelayed();
         });
 
         const typingEventHandlerCode = $(this.getCurrentElement()).attr("ontypingthis");
@@ -84,14 +87,13 @@ class TypingAnimation{
         });
     }
     onCurrentIterationFinished(){
-        const deferred = this.hideElement(this.getCurrentElement());
-
-        deferred.promise.then(() => {
+        const {promise} = this.hideElement(this.getCurrentElement());
+        promise.promise.then(() => {
             this.incrementIndex();
-            this.onCurrentIterationStarted();
+            this.onCurrentIterationDelayedBeforeStarting();
         });
     }
-    onCurrentIterationBeforeStartingDelay(){
+    onCurrentIterationDelayedBeforeStarting(){
         const promise = sleep(this.afterHidingDelayDuration);
         promise.then(() => {
             this.onCurrentIterationStarted();
@@ -112,12 +114,13 @@ class TypingAnimation{
         let numberOfCompletedAnimation = 0;
         let deferred = new Deferred();
 
+        let duration;
         for (let i = 0; i < spans.length; i++) {
             const span = spans[i];
-            const duration = (spans.length - i) * this.hidingDurationForEachLetter;
+            duration = (spans.length - i) * this.hidingDurationForEachLetter;
 
             const hiding = () => {
-                $(span).fadeOut(duration, () => {
+                this._playFadeOutAnimation(span, duration, "swing", () => {
                     numberOfCompletedAnimation++;
                     if (numberOfCompletedAnimation === spans.length)
                         deferred.resolve();
@@ -125,13 +128,28 @@ class TypingAnimation{
             }
             hiding();
         }
-        return deferred;
+        return {
+            promise: deferred,
+            durationEstimation: duration
+        };
     }
+    _playFadeOutAnimation(element, duration, ease, callback){
+        element = $(element);
+        const animation = {opacity: 0};
+        const parent = element.parent();
+
+        element.animate(animation, duration, ease, () => {
+            if (parent.hasClass("display-none-at-the-end"))
+                element.css('display', 'none');
+            callback();
+        });
+    }
+
 
     /**
      * Element should contain spans. Each span should only have one character.
      * @param element
-     * @return {Deferred}
+     * @return Object
      */
     showElement(element){
         element = $(element);
@@ -140,20 +158,30 @@ class TypingAnimation{
         let numberOfCompletedAnimation = 0;
         let deferred = new Deferred();
 
+        let duration;
         for (let i = 0; i < spans.length; i++) {
             const span = spans[i];
-            const duration = (i + 1) * this.poppingUpDurationForEachLetter;
+            duration = (i + 1) * this.poppingUpDurationForEachLetter;
 
             const showing = () => {
-                $(span).fadeIn(duration*3/5, () => {
+                this._playFadeInAnimation(span, duration*3/5, "swing", () => {
                     numberOfCompletedAnimation++;
                     if (numberOfCompletedAnimation === spans.length)
                         deferred.resolve();
-                })
+                });
             }
             delayedCallback(duration*2/5, showing);
         }
-        return deferred;
+        return {
+            promise: deferred,
+            durationEstimation: duration,
+        };
+    }
+
+    _playFadeInAnimation(element, duration, ease, callback){
+        $(element).css('opacity', 0);
+        $(element).css('display', 'initial');
+        $(element).animate({opacity: 1, display: "default"}, duration, ease, callback);
     }
 
 }
