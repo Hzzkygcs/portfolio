@@ -11,7 +11,10 @@ const http = require("http");
  * There are two separate repository:
  * This files will be stored at Portfolio repository, and vercel-deployment/ will be stored at Immanuel01 repository.
  * We will deploy Immanuel01 repository to vercell. Immanuel01 will contains a next js,
- * where the files will be stored at vercel-deploy/public
+ * where the files will be stored at vercel-deploy/public.
+ *
+ * BUT before deploying, no mater which method you choose above, you must run main.js first, then at the same time
+ * run prepare-files-for-vercel-deployment.js to update the vercel-deployment/
  * @type {string}
  */
 
