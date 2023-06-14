@@ -100,6 +100,7 @@ $(document).ready(() => {
 
     let starsCount = Math.ceil(documentArea / 5500);  // exclude special stars
     starsCount = Math.min(1100, starsCount);  // mencegah terlalu banyak bintang nanti jadi ngelag
+    console.log("Number of stars:", starsCount);
 
     if (runOnMobileAndTablet())
         starsCount = 200;
