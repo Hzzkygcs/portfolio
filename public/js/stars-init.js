@@ -65,7 +65,7 @@ function rgba(r, g, b, a){
 
 
 const MIN_Z = 100;
-const MAX_Z = 2000;
+const MAX_Z = 1500;
 
 function createRandomNormalStar(z, scene){
     // -10 to keep it from overflow
@@ -98,8 +98,8 @@ $(document).ready(() => {
     const documentArea = document.documentElement.scrollWidth * document.documentElement.scrollHeight;
     const scene = document.getElementsByClassName('scene')[0];
 
-    let starsCount = Math.ceil(documentArea / 4500);  // exclude special stars
-    starsCount = Math.min(1200, starsCount);  // mencegah terlalu banyak bintang nanti jadi ngelag
+    let starsCount = Math.ceil(documentArea / 5500);  // exclude special stars
+    starsCount = Math.min(1100, starsCount);  // mencegah terlalu banyak bintang nanti jadi ngelag
 
     if (runOnMobileAndTablet())
         starsCount = 200;
