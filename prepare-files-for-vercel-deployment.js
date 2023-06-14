@@ -5,10 +5,33 @@ const {app} = require("./main-setup");
 const http = require("http");
 
 
+/**
+ * Set vercell to NextJS, set Root Directory to "vercel-deployment"
+ * @type {string}
+ */
+
 const defaultDestinationRoot = "vercel-deployment/public";
 copyDirectoryIfNewer();
 renderIndexHtml();
 
+
+async function renderIndexHtml(){
+    const port = 8081;
+    const server = app.listen(port);
+    const url = `http://localhost:${port}`;
+
+    console.log(url);
+    console.log("sleeping");
+
+    http.get("http://localhost:8080", {}, (response) => {
+        response.on("data", function(chunk) {
+            const chunkAsString = '' + chunk;
+            writeToIndexHtml(defaultDestinationRoot, chunkAsString);
+            server.close();
+            console.log("written to index.html successfully");
+        });
+    });
+}
 
 function copyDirectoryIfNewer(sourceRoot = "public", sourcePath="",
                               destinationRoot=null){
@@ -58,23 +81,6 @@ function copyOrOverwriteFile(sourceFile, targetPath){
 
 
 
-async function renderIndexHtml(){
-    const port = 8081;
-    const server = app.listen(port);
-    const url = `http://localhost:${port}`;
-
-    console.log(url);
-    console.log("sleeping");
-
-    http.get("http://localhost:8080", {}, (response) => {
-        response.on("data", function(chunk) {
-            const chunkAsString = '' + chunk;
-            writeToIndexHtml(defaultDestinationRoot, chunkAsString);
-            server.close();
-            console.log("written to index.html successfully");
-        });
-    });
-}
 
 function writeToIndexHtml(destinationRoot, content){
     const targetPath = path.join(destinationRoot, "index.html");
