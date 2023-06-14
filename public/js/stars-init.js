@@ -1,4 +1,32 @@
 
+$(document).ready(() => {
+    const documentArea = document.documentElement.scrollWidth * document.documentElement.scrollHeight;
+    const scene = document.getElementsByClassName('scene')[0];
+
+    let starsCount = Math.ceil(documentArea / 6500);  // exclude special stars
+    starsCount = Math.min(900, starsCount);  // mencegah terlalu banyak bintang nanti jadi ngelag
+    console.log("Number of stars:", starsCount);
+
+    if (runOnMobileAndTablet())
+        starsCount = 200;
+
+    for (let i = 0; i < 95; i++) {
+        createRandomNormalStar(getRandomInt(120, 500), scene);
+    }
+
+    for (let i = 0; i < starsCount; i++) {
+        createRandomNormalStar(getRandomInt(200, MAX_Z), scene);
+    }
+
+    const allStars = $(scene).find("*[data-depth]");
+    for (const star of allStars) {
+        const jqueryStar = $(star);
+        jqueryStar.css("--data-depth", jqueryStar.attr("data-depth"));
+    }
+
+});
+
+
 function parseSVG(s) {
     // credit: https://stackoverflow.com/a/3642265/7069108
 
@@ -93,31 +121,4 @@ function createRandomNormalStar(z, scene){
     createNewNormalStar(x, y, dataDepth, size, "bisque", scene);
 }
 
-
-$(document).ready(() => {
-    const documentArea = document.documentElement.scrollWidth * document.documentElement.scrollHeight;
-    const scene = document.getElementsByClassName('scene')[0];
-
-    let starsCount = Math.ceil(documentArea / 5500);  // exclude special stars
-    starsCount = Math.min(1100, starsCount);  // mencegah terlalu banyak bintang nanti jadi ngelag
-    console.log("Number of stars:", starsCount);
-
-    if (runOnMobileAndTablet())
-        starsCount = 200;
-
-    for (let i = 0; i < 70; i++) {
-        createRandomNormalStar(getRandomInt(120, 500), scene);
-    }
-
-    for (let i = 0; i < starsCount; i++) {
-        createRandomNormalStar(getRandomInt(200, MAX_Z), scene);
-    }
-
-    const allStars = $(scene).find("*[data-depth]");
-    for (const star of allStars) {
-        const jqueryStar = $(star);
-        jqueryStar.css("--data-depth", jqueryStar.attr("data-depth"));
-    }
-
-});
 
