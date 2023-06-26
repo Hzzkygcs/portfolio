@@ -384,10 +384,10 @@ module.exports = function(fn) {
   // to the native rAF function
   return raf.call(root, fn)
 }
-module.exports.cancel = function() {
+export const cancel = function() {
   caf.apply(root, arguments)
 }
-module.exports.polyfill = function() {
+export const polyfill = function() {
   root.requestAnimationFrame = raf
   root.cancelAnimationFrame = caf
 }

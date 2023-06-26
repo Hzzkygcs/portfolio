@@ -101,7 +101,6 @@ body, html{
     border-radius: 50%;
     width: 5rem;
     height: 5rem;
-    background-image: var(--img-url);
     background-repeat: no-repeat;
     background-size: cover;
 }

@@ -15,10 +15,10 @@ export default function TypingAnimationWelcomeSection({rowPos}) {
             </h1>
             <div className="min-height text-4xl sm:text-5xl text-center" style={{margin: "0.1rem"}}>
                 <span className="font-white my-auto inline-block set-equal-text-vertical-position">
-                    {"I'm Nuel, and I'm a"}
+                    I'm Nuel, and I'm a
                     <br className="inline lg:hidden" />
                 </span>
-
+                &nbsp;
                 <span className="typing-animation not-ready font-tosca
                     text-center md:text-left
                     set-equal-text-vertical-position">
