@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import {replaceNewLineWithBrTag} from "../../commpon_utilities/replaceStringWithElements.jsx";
 import {urlCss} from "../../commpon_utilities/urlCss.js";
+import {generateRandomId} from "../../commpon_utilities/randomId.js";
 
 const experienceBoxPropTypes = {
     givenId: PropTypes.number,
@@ -47,16 +48,4 @@ ExperienceBox.propTypes = experienceBoxPropTypes;
 
 
 
-function generateRandomId() {
-    return getRandomInt(1, 1000_000);
-}
-
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-
-    // The maximum is exclusive and the minimum is inclusive
-    return Math.floor(Math.random() * (max - min) + min);
-}
 
