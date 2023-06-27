@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import {urlCss} from "../../commpon_utilities/urlCss.js";
-import {useEffect} from "react";
 import {generateRandomId} from "../../commpon_utilities/randomId.js";
 
 const skillsPropTypes = {
@@ -13,65 +12,21 @@ export default function Skills({tooltipText, clickUrl, imgUrl, id}) {
     const elementNumericalId = id ?? generateRandomId();
     const elementId = `skill-${elementNumericalId}`;
 
-    useEffect(function () {
-        const currentContainer = $(elementId).parent();
-        const element = currentContainer.find(".skill-thumbnail-box").get(0);
-
-        let goToLink = () => {
-            currentContainer.find(".skill-link").get(0).click();
-        }
-        addOnHoldEvent(element, goToLink,  (e) => {
-            console.log("click")
-            element.dispatchEvent(new Event("mouseenter"));
-        });
-    }, []);
-
-    const onPointerUp = (e) => {
-        if (e.pointerType !== "mouse")
-            return;
-        goToLink();
-    };
 
 
     return (<>
-        <div>
-            <div className="skill-thumbnail-box"
-                 id={elementId}
-                 data-tippy-content={tooltipText}
-                 onPointerUp={onPointerUp}>
+
+        <div className="skill-thumbnail-box"
+             id={elementId}
+             data-tippy-content={tooltipText}>
+            <a className="skill-link"
+               href={clickUrl}
+               target="_blank">
                 <div style={{
                     "--img-url": urlCss(imgUrl),
                 }}>
                 </div>
-            </div>
-
-            <a className="skill-link"
-               href={clickUrl}
-               target="_blank"></a>
-            {/*
-            TODO
-            <script>
-                ((scriptTagElement) => {
-                const currentContainer = $(scriptTagElement).parent();
-                const element = currentContainer.find(".skill-thumbnail-box").get(0);
-
-                tippy(element, {
-                content: currentContainer.find(".skill-tip-content").html(),
-            });
-
-                let goToLink = () => {
-                currentContainer.find(".skill-link").get(0).click();
-            }
-                addOnHoldEvent(element, goToLink,  (e) => {
-                element.dispatchEvent(new Event("mouseenter"));
-            });
-                $(element).on('pointerup', (e) => {
-                if (e.pointerType !== "mouse")
-                return;
-                goToLink();
-            });
-            })(document.currentScript);
-            </script>*/}
+            </a>
         </div>
     </>);
 }
