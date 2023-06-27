@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
+import {replaceNewLineWithBrTag} from "../../commpon_utilities/replaceStringWithElements.jsx";
+import {urlCss} from "../../commpon_utilities/urlCss.js";
 
 const experienceBoxPropTypes = {
     givenId: PropTypes.number,
@@ -58,29 +60,3 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-function urlCss(content) {
-    return `url('${content}')`
-}
-
-function replaceNewLineWithBrTag(sourceString) {
-    return replaceStringWithElement(sourceString, "\n", <br />);
-}
-
-function replaceStringWithElement(sourceString, targetString, element) {
-    const splitted = sourceString.split(targetString);
-    const ret = [];
-
-    for (let i = 0; i < splitted.length-1; i++) {
-        const evenId = 2 * i;
-        const oddId = evenId + 1;
-
-        ret.push(<React.Fragment key={evenId}>{splitted[i]}</React.Fragment>);
-        ret.push(React.cloneElement(element, {
-            key: oddId,
-        }));
-    }
-    const lastSplitted = splitted[splitted.length - 1]
-    ret.push(lastSplitted);
-
-    return ret;
-}
