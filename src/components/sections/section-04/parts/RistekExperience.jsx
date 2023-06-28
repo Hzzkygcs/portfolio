@@ -7,7 +7,8 @@ RistekExperience.propTypes = {};
 export function RistekExperience({}) {
     return (<>
         <Carousel>
-            <CarouselImage imagePath={"/img/experiences/ristek/about-cp.png"} />
+            <CarouselImage imagePath={"/img/experiences/ristek/about-cp.png"}
+                           descriptionText={"Abcdef"}/>
             <CarouselImage imagePath={"/img/experiences/ristek/team-cp.png"} />
             <CarouselImage imagePath={"/img/experiences/ristek/lomba-compfest.jpg"}
                            descriptionText={"SCPC Compfest finalist - one of several competitions participated by Ristek"}/>

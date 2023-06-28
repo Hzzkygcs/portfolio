@@ -71,7 +71,6 @@ class TypingAnimation{
 
 
     onCurrentIterationStarted(){
-        console.log("start");
         const {promise} = this.showElement(this.getCurrentElement());
         promise.promise.then(() => {
             this.onCurrentIterationDelayed();

@@ -27,6 +27,13 @@ export function Modal({modalTitle, children, additionalClasses=null,
     const modalId = "modal-" + numberOfModal++;
     const [opened, setOpened] = useState(true);
 
+    function constructor() {
+        document.body.style.overflow = "hidden";
+    }
+    function destructor() {
+        document.body.style.overflow = "auto";
+    }
+
     async function onCloseButtonClicked(e) {
         // return false to cancel close, or null/integer to determine how long the close animation will be.
         const cancelClose = onModalClosing == null? null : onModalClosing(e, modalId);
@@ -39,6 +46,7 @@ export function Modal({modalTitle, children, additionalClasses=null,
             setOpened(false);
             onModalClosed(e);
         });
+        destructor();
     }
 
     useEffect(() => {
@@ -46,6 +54,7 @@ export function Modal({modalTitle, children, additionalClasses=null,
         modalElement.fadeOut(0, function () {
             modalElement.removeClass("hidden");
             modalElement.fadeIn(fadeInDuration);
+            constructor();
         });
     }, []);
 
