@@ -1,10 +1,14 @@
 import PropTypes from "prop-types";
+import {useState} from "react";
 
 const emailContactPropTypes = {
     email: PropTypes.string.isRequired,
 };
 export default function EmailContact({email,}) {
     const toastIconSrc = "/img/misc/copy-svgrepo-com.svg";
+    const [activeToasts, setActiveToasts] = useState([]);
+
+
 
     function onClick() {
         navigator.clipboard.writeText(email);
@@ -14,6 +18,7 @@ export default function EmailContact({email,}) {
             additionalClass: ['copied-notification-toast'],
         });
     }
+
 
     return (
         <>
