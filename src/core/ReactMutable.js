@@ -51,6 +51,12 @@ class ReactMutable {
     }
 }
 
+/**
+ * @template T
+ * @param setStateFunction
+ * @param {T} mutableValue
+ * @returns {ReactMutable|T}
+ */
 function create(setStateFunction, mutableValue) {
     const instance = new ReactMutable(setStateFunction, mutableValue);
 
