@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import {Portal} from "react-portal";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 
 Toast.propTypes = {
@@ -10,6 +10,7 @@ Toast.propTypes = {
     showingUpAnimationDurationMs: PropTypes.number,
     leavingAnimationDurationMs: PropTypes.number,
     additionalClass: PropTypes.array,
+    onToastCreated: PropTypes.func,
     onToastFinished: PropTypes.func,
 };
 
@@ -20,7 +21,8 @@ export function Toast({
     showingUpAnimationDurationMs = 300,
     leavingAnimationDurationMs = 500,
     additionalClass = [],
-    onToastFinished=()=>{},
+    onToastCreated=(_id)=>{},
+    onToastFinished=(_id)=>{},
 }) {
     const [showingUp, setShowingUp] = useState(true);
     const toastId = "toast-" + toastCount++;
@@ -31,13 +33,15 @@ export function Toast({
         return $(`#${toastId}`)
     }
     useEffect(function () {
+        onToastCreated(toastId);
         setTimeout(() => {
             toastElement().addClass("deployed");
         }, 5);
 
         setTimeout(() => {
-            toastElement.fadeOut(leavingAnimationDurationMs, () => {
-                onToastFinished();
+            toastElement().fadeOut(leavingAnimationDurationMs, () => {
+                setShowingUp(false);
+                onToastFinished(toastId);
             });
         }, timeoutMs);
     }, []);

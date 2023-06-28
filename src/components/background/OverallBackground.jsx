@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import {gradientSpreadPercentage} from "../../configuration/style.js";
+import styled from "styled-components";
 
 const overallBackgroundPropTypes = {
     colorsForEachSection: PropTypes.array.isRequired,
@@ -33,14 +34,16 @@ export default function OverallBackground({colorsForEachSection,}) {
                     position: colorEndLowerPosition,
                 },
             });
+        console.log(backgroundCssCode)
+
+        const BackgroundElement = styled.div`
+          grid-row: ${i+1};
+          background: ${backgroundCssCode};
+        `;
 
         backgroundElements.push(
-            <div className="section-gradient-effect col-start-1"
+            <BackgroundElement className="section-gradient-effect col-start-1"
                  key={i}
-                 style={{
-                     gridRow: i+1,
-                     background: backgroundCssCode,
-                 }}
             />
         );
     }
@@ -58,9 +61,9 @@ function getLinearGradientBackground({start, main, end}) {
     const {color: endingColor, position: gradientEndLowerPosition} = end;
 
     return `linear-gradient(180deg,
-                ${startingColor} ${gradientStartPosition},
-                ${mainColor} ${colorMainUpperPosition},
-                ${mainColor} ${gradientMainLowerPosition},
-                ${endingColor} ${gradientEndLowerPosition}
-                )`.replaceAll(/\s/g, "");
+                ${startingColor} ${gradientStartPosition}%,
+                ${mainColor} ${colorMainUpperPosition}%,
+                ${mainColor} ${gradientMainLowerPosition}%,
+                ${endingColor} ${gradientEndLowerPosition}%
+                )`.replaceAll(/\s\s+/g, " ");
 }

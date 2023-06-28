@@ -1,22 +1,52 @@
 import PropTypes from "prop-types";
 import {useState} from "react";
+import ReactMutable from "../../../../core/ReactMutable.js";
+import {Toast} from "../../common/components/Toast.jsx";
+import {getStructuredId} from "../../commpon_utilities/structuredId.js";
 
 const emailContactPropTypes = {
     email: PropTypes.string.isRequired,
 };
 export default function EmailContact({email,}) {
     const toastIconSrc = "/img/misc/copy-svgrepo-com.svg";
-    const [activeToasts, setActiveToasts] = useState([]);
 
+    function setActiveToastsForwarding(value) {
+        console.log("setting ", value)
+        return setActiveToasts(value);
+    }
+
+    const [activeToasts, setActiveToasts] = useState(ReactMutable.create(
+        setActiveToastsForwarding, {}
+    ));
 
 
     function onClick() {
-        navigator.clipboard.writeText(email);
-        showToast({
-            toastMessage: 'Email copied',
-            toastIconSrc: toastIconSrc, /* TODO */
-            additionalClass: ['copied-notification-toast'],
-        });
+        copyToClipboard(email);
+        createNewToast();
+    }
+    function createNewToast() {
+        const artificialToastId = getStructuredId();
+
+        // noinspection UnnecessaryLocalVariableJS
+        const toastElement = (
+            <Toast toastMessage={'Email copied'}
+                   toastIconSrc={"/img/misc/copy-svgrepo-com.svg"}
+                   additionalClass={['copied-notification-toast']}
+                   onToastFinished={onToastFinished}
+                   key={`${artificialToastId}`}
+            />
+        );
+
+        console.log("before mutate", activeToasts.v);
+        activeToasts[artificialToastId] = toastElement;
+        activeToasts.notifyMutation();
+        console.log("after mutate", activeToasts.v);
+
+        function onToastFinished() {
+            delete activeToasts[artificialToastId];
+            activeToasts.notifyMutation();
+            console.log("after deleted", activeToasts.v);
+        }
     }
 
 
@@ -38,6 +68,8 @@ export default function EmailContact({email,}) {
                 </a>
             </div>
 
+            {Object.values(activeToasts.v)}
+
             {/* for eager loading/caching */}
             <img src={toastIconSrc} className="hidden" alt={''} />
         </>
@@ -45,3 +77,6 @@ export default function EmailContact({email,}) {
 }
 EmailContact.propTypes = emailContactPropTypes;
 
+function copyToClipboard(value) {
+    navigator.clipboard.writeText(value);
+}

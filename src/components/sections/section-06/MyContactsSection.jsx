@@ -1,25 +1,11 @@
 import PropTypes from "prop-types";
 import EmailContact from "./parts/EmailContact.jsx";
 import OtherContacts from "./parts/OtherContacts.jsx";
-import ReactMutable from "../../../core/ReactMutable.js";
 
 const myContactsSectionPropTypes = {
     rowPos: PropTypes.number.isRequired,
 };
 export default function MyContactsSection({rowPos,}) {
-    const array = [];
-    const array2 = [];
-
-    const a = ReactMutable.create(()=>{console.log("mutation notified")}, array);
-
-    console.log(a.v);
-    a.push(5);
-    a.push(1);
-    a.push(3);
-    console.log(a);
-    console.log(a.v);
-    a.notifyMutation();
-
 
     return (<>
         <div id="connect-with-me"
