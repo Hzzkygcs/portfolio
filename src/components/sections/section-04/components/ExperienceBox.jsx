@@ -4,15 +4,16 @@ import {replaceNewLineWithBrTag} from "../../commpon_utilities/replaceStringWith
 import {urlCss} from "../../commpon_utilities/urlCss.js";
 import {generateRandomId} from "../../commpon_utilities/randomId.js";
 
-const experienceBoxPropTypes = {
+ExperienceBox.propTypes = {
     givenId: PropTypes.number,
     img_src: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     detail: PropTypes.string.isRequired,
+    children: PropTypes.any,
+    onClick: PropTypes.func,
 };
-export default function ExperienceBox({givenId, img_src, title, detail}) {
+export default function ExperienceBox({givenId, img_src, title, detail, children, onClick=()=>{}}) {
     const id = givenId ?? generateRandomId();
-
 
     return (<>
         <div className="experience-div" id={`experience-${id}`}>
@@ -33,18 +34,15 @@ export default function ExperienceBox({givenId, img_src, title, detail}) {
                     </p>
                 </div>
             </div>
-            <div className="more-details-btn noselect">
+            <div className="more-details-btn noselect" onClick={onClick}>
                 More Details
             </div>
 
-
-            <template id={`experience-modal-${id}`}>
-                {/*    experience.modalOnClick.toString() TODO */}
-            </template>
+            {children}
         </div>
     </>);
 }
-ExperienceBox.propTypes = experienceBoxPropTypes;
+
 
 
 

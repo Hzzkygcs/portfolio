@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const contactDetailPropTypes = {
+ContactDetail.propTypes = {
     tooltipText: PropTypes.string.isRequired,
     contactTargetUrl: PropTypes.string.isRequired,
     contactImageUrl: PropTypes.string.isRequired,
@@ -16,5 +16,3 @@ export default function ContactDetail({tooltipText, contactTargetUrl, contactIma
         </a>
     </>);
 }
-ContactDetail.propTypes = contactDetailPropTypes;
-
