@@ -14,6 +14,9 @@ class ReactMutable {
     get v(){ // get value
         return this.#mutableValue;
     }
+    get mutationId(){
+        return this.#idReactMutable;
+    }
 
     constructor(setStateFunction, mutableValue) {
         this.#idReactMutable = numberOfReactWrapMutableObjects++;
@@ -26,7 +29,8 @@ class ReactMutable {
     }
 
     notifyMutation(){
-        this.#setStateFunction(this.getNewMutationVersion())
+        const newMutationVersion = this.getNewMutationVersion();
+        this.#setStateFunction(newMutationVersion)
     }
 
     __globalGetter(target, name){
@@ -49,6 +53,25 @@ class ReactMutable {
         }
         return ret;
     }
+
+    __globalSetter(target, name, value){
+        console.assert(Object.is(target, this));
+        if (name in this){
+            this[name] = value;
+            return true;
+        }
+        this.v[name] = value;
+        return true;
+    }
+    __globalDeleter(target, name){
+        console.assert(Object.is(target, this));
+        if (name in this){
+            delete this[name];
+            return true;
+        }
+        delete this.v[name];
+        return true;
+    }
 }
 
 /**
@@ -63,6 +86,12 @@ function create(setStateFunction, mutableValue) {
     return new Proxy(instance, {
         get(target, name) {
             return instance.__globalGetter(target, name)
+        },
+        deleteProperty(target, name) {
+            return instance.__globalDeleter(target, name)
+        },
+        set(target, name, value) {
+            return instance.__globalSetter(target, name, value)
         }
     });
 }
