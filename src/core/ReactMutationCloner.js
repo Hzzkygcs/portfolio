@@ -5,9 +5,10 @@
 // Cons:
 // less-cleaner due to more boilerplate code (we need to call notifyMutation() everytime new state changes)
 import {getStructuredId} from "../components/sections/commpon_utilities/structuredId.js";
+import _ from "lodash";
 
-class ReactMutable {
-    #idReactMutable;
+class ReactMutationCloner {
+    #idReactMutationCloner;
     #setStateFunction;
     #mutableValue;
 
@@ -15,26 +16,29 @@ class ReactMutable {
         return this.#mutableValue;
     }
     get mutationId(){
-        return this.#idReactMutable;
+        return this.#idReactMutationCloner;
     }
 
     constructor(setStateFunction, mutableValue) {
-        this.#idReactMutable = getStructuredId();
+        this.#idReactMutationCloner = getStructuredId();
         this.#setStateFunction = setStateFunction;
         this.#mutableValue = mutableValue;
     }
 
-    getNewMutationVersion(){
-        return create(this.#setStateFunction, this.#mutableValue);
-    }
+    performMutation(mutatorFunction){
+        console.log("performing mutation");
+        const targetMutableValue = _.cloneDeep(this.#mutableValue);
+        mutatorFunction(targetMutableValue);
 
-    notifyMutation(){
-        const newMutationVersion = this.getNewMutationVersion();
-        this.#setStateFunction(newMutationVersion)
+        console.log("this.#setStateFunction", this.#setStateFunction);
+        const newVersion = create(this.#setStateFunction, targetMutableValue);
+        console.log(Object.is(newVersion, this))
+        console.log(newVersion === this)
+        this.#setStateFunction(newVersion);
     }
 
     __globalGetter(target, name){
-        // if try to access a property/method that ReactMutable does not have,
+        // if try to access a property/method that ReactMutationCloner does not have,
         // then forward it to this.mutableValue
         console.assert(Object.is(target, this));
 
@@ -51,25 +55,15 @@ class ReactMutable {
         if (typeofFunction(ret)) {
             return ret.bind(bindingContext);
         }
-        return ret;
+        return Object.freeze(ret);
     }
 
     __globalSetter(target, name, value){
-        console.assert(Object.is(target, this));
-        if (name in this){
-            this[name] = value;
-            return true;
-        }
-        this.v[name] = value;
+        this.performMutation((object) => object[name] = value);
         return true;
     }
     __globalDeleter(target, name){
-        console.assert(Object.is(target, this));
-        if (name in this){
-            delete this[name];
-            return true;
-        }
-        delete this.v[name];
+        this.performMutation((object) => delete object[name]);
         return true;
     }
 }
@@ -78,10 +72,11 @@ class ReactMutable {
  * @template T
  * @param setStateFunction
  * @param {T} mutableValue
- * @returns {ReactMutable|T}
+ * @returns {ReactMutationCloner|T}
  */
 function create(setStateFunction, mutableValue) {
-    const instance = new ReactMutable(setStateFunction, mutableValue);
+    console.warn("ReactMutationCloner is not yet tested");
+    const instance = new ReactMutationCloner(setStateFunction, mutableValue);
 
     return new Proxy(instance, {
         get(target, name) {
