@@ -59,11 +59,11 @@ export function StarBackground({numberOfOrdinaryStars=null, numberOfSpecialStars
 
 
 function getRecommendedNumberOfOrdinaryStars() {
-    let numberOfOrdinaryStars = Math.ceil(getDocumentArea() / 12500);
+    let numberOfOrdinaryStars = Math.ceil(getDocumentArea() / 36500);
 
     if (runOnMobileAndTablet())
         return Math.min(200, numberOfOrdinaryStars);
-    const maximumNumberOfOrdinaryStars = 500;
+    const maximumNumberOfOrdinaryStars = 200;
     numberOfOrdinaryStars = Math.min(maximumNumberOfOrdinaryStars, numberOfOrdinaryStars);
     return numberOfOrdinaryStars;
 }
