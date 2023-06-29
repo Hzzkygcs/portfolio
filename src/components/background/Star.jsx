@@ -4,7 +4,7 @@ import {runOnMobileAndTablet} from "../../core/DeviceUtility.js";
 import "../../../public/css/star.css";
 
 export const MIN_Z = 100;
-export const MAX_Z = 1200;
+export const MAX_Z = 1000;
 
 
 Star.propTypes = {
