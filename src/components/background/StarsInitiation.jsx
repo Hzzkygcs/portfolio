@@ -62,7 +62,7 @@ function getRecommendedNumberOfOrdinaryStars() {
     let numberOfOrdinaryStars = Math.ceil(getDocumentArea() / 36500);
 
     if (runOnMobileAndTablet())
-        return Math.min(200, numberOfOrdinaryStars);
+        return Math.min(100, numberOfOrdinaryStars);
     const maximumNumberOfOrdinaryStars = 200;
     numberOfOrdinaryStars = Math.min(maximumNumberOfOrdinaryStars, numberOfOrdinaryStars);
     return numberOfOrdinaryStars;
