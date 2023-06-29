@@ -169,6 +169,9 @@ const ImageContent = styled.img`
 
 function swiperElement(carouselId, onSlideChange, carouselTransitionEffect, carouselImages) {
     return <Swiper className="mySwiper"
+                   style={{
+                       "--swiper-navigation-size": "3.5rem",
+                   }}
                    pagination={true}
                    navigation={true}
                    loop={true}
