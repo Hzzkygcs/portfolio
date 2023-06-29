@@ -17,11 +17,9 @@
 }
 
 .star-effect-svg.scene .inner-3th{
-    transform: translate(calc(12.0rem * var(--data-depth)), 0);
+    transform: translate(calc(12.0rem * var(--data-depth)), 1px);
 }
 .star-effect-svg.scene .inner-inner{
-    will-change: transform;
-
     animation-name: three-petal-rose-rotation-animation;
     animation-iteration-count: infinite;
     animation-duration: 15s;

@@ -4,9 +4,7 @@ import {runOnMobileAndTablet} from "../../core/DeviceUtility.js";
 import "../../../public/css/star.css";
 
 export const MIN_Z = 100;
-export const MAX_Z = 601;
-
-export const Z_OPTIONS = [100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600];
+export const MAX_Z = 600;
 
 
 Star.propTypes = {
@@ -22,8 +20,17 @@ export function Star({z}) {
                 'transform': translateCssCode(x, y),
                 '--data-depth': dataDepth,
             }}>
-                <circle className="normal-star-path"
-                        r={radius} fill={color} />
+                <g className="inner-inner"> {/* responsible for star's rotation (orbit) */}
+
+                    {/* responsible for star's position slightly to the right. combined to the
+                    rotation above, this will create circular-motion to the star. */}
+                    <g className={'inner-3th'}
+                       style={{'--data-depth': dataDepth}}>
+
+                        <circle className="normal-star-path"
+                                r={radius} fill={color} />
+                    </g>
+                </g>
             </g>
     </>);
 }
@@ -35,34 +42,28 @@ function getRandomStarMetadata(z) {
     const maxX = document.documentElement.scrollWidth - starsPadding;
     const maxY = document.documentElement.scrollHeight - starsPadding;
 
-    const x = getRandomInt(starsPadding, maxX);
-    const y = getRandomInt(starsPadding, maxY);
-
-    return {
-        x, y,
-        ...getDataDepth(z),
-        "color": "bisque",
-    };
-}
-
-export function getDataDepth(z) {
     // let's say z is the star's distance
     const minZ = MIN_Z;
     const maxZ = MAX_Z;
-    const sizeForMinZ = 2.5;
-    console.assert(minZ <= z && z <= maxZ, z);
-
     let dataDepthForMinZ = 0.4;
     if (runOnMobileAndTablet()){
         dataDepthForMinZ = 0.5;
     }
-    let dataDepth = dataDepthForMinZ * (minZ / z) ** 1.5 ;
-    const radius = sizeForMinZ * (minZ / z);
+    const sizeForMinZ = 2.5;
+    console.assert(minZ <= z && z <= maxZ);
 
+
+    const x = getRandomInt(starsPadding, maxX);
+    const y = getRandomInt(starsPadding, maxY);
+
+    const size = sizeForMinZ * (minZ / z);
+    let dataDepth = dataDepthForMinZ * (minZ / z) ** 1.5 ;
     dataDepth = dataDepth * getRandomInt(100, 105) / getRandomInt(100, 105);
     return {
-        dataDepth, radius
-    }
+        x, y,
+        dataDepth, radius: size,
+        "color": "bisque",
+    };
 }
 
 function translateCssCode(x, y) {
