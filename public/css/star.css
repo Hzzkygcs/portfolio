@@ -16,7 +16,7 @@
     width: 100%;
 }
 
-.star-effect-svg.scene .outer{
+.star-effect-svg.scene .inner-inner{
     animation-name: three-petal-rose-animation;
     animation-iteration-count: infinite;
     animation-duration: 15s;

@@ -19,8 +19,11 @@ export function Star({z}) {
             <g className="inner star-container" style={{
                 'transform': translateCssCode(x, y)
             }}>
-                <circle className="normal-star-path"
-                        r={radius} fill={color} />
+                <g className="inner-inner"
+                   style={{'--data-depth': dataDepth}}>
+                    <circle className="normal-star-path"
+                            r={radius} fill={color} />
+                </g>
             </g>
         </g>
     </>);
