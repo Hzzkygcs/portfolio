@@ -1,7 +1,5 @@
-import ExperienceBox from "./components/ExperienceBox.jsx";
 import ExperienceGroup from "./components/ExperienceGroup.jsx";
 import PropTypes from "prop-types";
-import {Modal} from "../common/components/Modal.jsx";
 import React from "react";
 import ExperienceBoxAndModal from "./components/ExperienceBoxAndModal.jsx";
 import {UniversitasIndonesia} from "./parts/UniversitasIndonesia.jsx";
@@ -49,20 +47,3 @@ export default function ExperienceSection({rowPos}) {
 ExperienceSection.propTypes = experienceSectionPropTypes;
 
 
-
-
-function declareExperience({img_src, title, detail, openedModal, setOpenedModal}) {
-    return <ExperienceBox img_src='/img/fexb.png'
-                          title='FExB FEB UI'
-                          detail='Backend Engineer'>
-        {modalIsOpened &&
-            <Modal
-                modalTitle={'FExB FEB UI'}
-                _urlHashId={'experience-' + getUrlHashId('FExB FEB UI')}
-                onModalClosed={closeModal}>
-
-                Tes
-            </Modal>
-        }
-    </ExperienceBox>;
-}

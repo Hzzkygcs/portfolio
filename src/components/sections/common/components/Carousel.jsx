@@ -180,6 +180,9 @@ function swiperElement(carouselId, onSlideChange, carouselTransitionEffect, caro
                    onSlideChangeTransitionStart={onSlideChange}
 
                    effect={carouselTransitionEffect}
+                   flipEffect={{
+                       slideShadows: false,
+                   }}
                    fadeEffect={{
                        crossFade: false,
                    }}
@@ -192,9 +195,19 @@ function swiperElement(carouselId, onSlideChange, carouselTransitionEffect, caro
     >
         {carouselImages.map(
             imgSrc => <SwiperSlide key={carouselItemCounter++}>
-                <ImageContent src={imgSrc}
-                              style={{userSelect: "none"}}
-                />
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}>
+                    <ImageContent src={imgSrc}
+                                  style={{
+                                      userSelect: "none",
+                                      maxHeight: "50vh",
+                                  }}
+                    />
+                </div>
+
             </SwiperSlide>)}
     </Swiper>;
 }
