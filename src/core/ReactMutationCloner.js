@@ -26,14 +26,10 @@ class ReactMutationCloner {
     }
 
     performMutation(mutatorFunction){
-        console.log("performing mutation");
         const targetMutableValue = _.cloneDeep(this.#mutableValue);
         mutatorFunction(targetMutableValue);
 
-        console.log("this.#setStateFunction", this.#setStateFunction);
         const newVersion = create(this.#setStateFunction, targetMutableValue);
-        console.log(Object.is(newVersion, this))
-        console.log(newVersion === this)
         this.#setStateFunction(newVersion);
     }
 

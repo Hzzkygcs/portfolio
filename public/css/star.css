@@ -20,7 +20,7 @@
     animation-name: three-petal-rose-animation;
     animation-iteration-count: infinite;
     animation-duration: 15s;
-    animation-delay: 0;
+    animation-delay: 0ms;
     animation-timing-function: linear;
 
     transform-style: preserve-3d;

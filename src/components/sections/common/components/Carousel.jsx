@@ -83,8 +83,6 @@ export function Carousel({classes=[], children=[],}) {
     const carouselDescriptions = carouselData.map(prop => prop.descriptionText ?? "");
 
     const carouselTransitionEffect = getQueryParameter("effect", "flip");
-    console.log(carouselTransitionEffect);
-
 
     function descriptionContainer() {
         return $(`#${carouselId} .detail`);

@@ -1,8 +1,15 @@
 import {choosenGradientTheme} from "./configuration/style.js";
-import OverallBackground from "./components/background/OverallBackground.jsx";
+import GradientBackground from "./components/background/GradientBackground.jsx";
 import AllSections from "./components/sections/AllSections.jsx";
+import {StarBackground} from "./components/background/StarsInitiation.jsx";
+import {useEffect, useState} from "react";
 
 function App() {
+    const [componentMounted, setComponentMounted] = useState(false);
+    useEffect(function () {
+        setComponentMounted(true);
+    }, [])
+
   return (
     <>
       <div id="main-stack-layout"
@@ -12,7 +19,8 @@ function App() {
            }}>
 
           <AllSections />
-          <OverallBackground colorsForEachSection={choosenGradientTheme} />
+          <GradientBackground colorsForEachSection={choosenGradientTheme} />
+          {componentMounted && <StarBackground />}
       </div>
     </>
   )

@@ -11,7 +11,6 @@ export default function EmailContact({email,}) {
     const toastIconSrc = "/img/misc/copy-svgrepo-com.svg";
 
     function setActiveToastsForwarding(value) {
-        console.log("setting ", value)
         return setActiveToasts(value);
     }
 
@@ -37,15 +36,12 @@ export default function EmailContact({email,}) {
             />
         );
 
-        console.log("before mutate", activeToasts.v);
         activeToasts[artificialToastId] = toastElement;
         activeToasts.notifyMutation();
-        console.log("after mutate", activeToasts.v);
 
         function onToastFinished() {
             delete activeToasts[artificialToastId];
             activeToasts.notifyMutation();
-            console.log("after deleted", activeToasts.v);
         }
     }
 

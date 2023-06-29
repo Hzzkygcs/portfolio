@@ -2,10 +2,13 @@ import PropTypes from "prop-types";
 import {gradientSpreadPercentage} from "../../configuration/style.js";
 import styled from "styled-components";
 
+const BackgroundElement = styled.div``;
+
+
 const overallBackgroundPropTypes = {
     colorsForEachSection: PropTypes.array.isRequired,
 };
-export default function OverallBackground({colorsForEachSection,}) {
+export default function GradientBackground({colorsForEachSection,}) {
 
     const backgroundElements = [];
 
@@ -34,16 +37,15 @@ export default function OverallBackground({colorsForEachSection,}) {
                     position: colorEndLowerPosition,
                 },
             });
-        console.log(backgroundCssCode)
 
-        const BackgroundElement = styled.div`
-          grid-row: ${i+1};
-          background: ${backgroundCssCode};
-        `;
 
         backgroundElements.push(
             <BackgroundElement className="section-gradient-effect col-start-1"
-                 key={i}
+                               key={i}
+                               style={{
+                                   gridRow: i+1,
+                                   background: backgroundCssCode,
+                               }}
             />
         );
     }
@@ -53,7 +55,7 @@ export default function OverallBackground({colorsForEachSection,}) {
         {backgroundElements}
     </>);
 }
-OverallBackground.propTypes = overallBackgroundPropTypes;
+GradientBackground.propTypes = overallBackgroundPropTypes;
 
 function getLinearGradientBackground({start, main, end}) {
     const {color: startingColor, position: gradientStartPosition} = start;
