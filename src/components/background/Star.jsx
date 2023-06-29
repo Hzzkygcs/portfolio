@@ -14,19 +14,24 @@ Star.propTypes = {
 export function Star({z}) {
     const {x, y, dataDepth, radius, color} = getRandomStarMetadata(z);
 
+    // these stars will orbit/move in circular motion
     return (<>
-        <g className="outer" data-depth={dataDepth} style={{'--data-depth': dataDepth}}>
-            <g className="inner star-container" style={{
-                'transform': translateCssCode(x, y)
+            <g style={{ /* responsible for star's center position of-the-circle orbit */
+                'transform': translateCssCode(x, y),
+                '--data-depth': dataDepth,
             }}>
-                <g className="inner-inner">
-                    <g className={'inner-3th'} style={{'--data-depth': dataDepth}}>
+                <g className="inner-inner"> {/* responsible for star's rotation (orbit) */}
+
+                    {/* responsible for star's position slightly to the right. combined to the
+                    rotation above, this will create circular-motion to the star. */}
+                    <g className={'inner-3th'}
+                       style={{'--data-depth': dataDepth}}>
+
                         <circle className="normal-star-path"
                                 r={radius} fill={color} />
                     </g>
                 </g>
             </g>
-        </g>
     </>);
 }
 
