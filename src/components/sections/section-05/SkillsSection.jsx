@@ -49,14 +49,25 @@ export default function SkillsSection({rowPos}) {
                         clickUrl="https://spring.io/projects/spring-boot"
                         tooltipText="Spring Boot - Java" />
                     <Skills
-                        imgUrl="/img/skills/xamarin.png"
-                        clickUrl="https://dotnet.microsoft.com/en-us/apps/xamarin"
-                        tooltipText="Xamarin - C#" />
+                        imgUrl="/img/skills/react.png"
+                        clickUrl="https://react.dev/"
+                        tooltipText="React - NodeJs" />
                     <Skills
                         imgUrl="/img/skills/flutter.png"
                         clickUrl="https://flutter.dev/"
                         tooltipText="Flutter - Dart" />
+                    {/*<Skills*/}
+                    {/*    imgUrl="/img/skills/xamarin.png"*/}
+                    {/*    clickUrl="https://dotnet.microsoft.com/en-us/apps/xamarin"*/}
+                    {/*    tooltipText="Xamarin - C#" />*/}
+
                 </SkillGroups>
+                {/*<SkillGroups title={'Other'}>*/}
+                {/*    <Skills*/}
+                {/*        imgUrl="/img/skills/refactoring-guru.png"*/}
+                {/*        clickUrl="https://refactoring.guru/cert/r/MTMxODEx"*/}
+                {/*        tooltipText="Clean Code: Dive Into Refactoring - Refactoring Guru" />*/}
+                {/*</SkillGroups>*/}
 
             </div>
         </div>
