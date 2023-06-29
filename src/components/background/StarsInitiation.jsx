@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import ReactMutable from "../../core/ReactMutable.js";
 import {useState} from "react";
-import {MAX_Z, Star} from "./Star.jsx";
-import {getRandomInt} from "../../core/NumbersUtility.js";
+import {getDataDepth, MAX_Z, Star} from "./Star.jsx";
+import {getRandomInt, roundToNearestNumber} from "../../core/NumbersUtility.js";
 import {runOnMobileAndTablet} from "../../core/DeviceUtility.js";
 import {getStructuredId} from "../sections/commpon_utilities/structuredId.js";
+import {sum} from "lodash";
 
 
 /*
@@ -20,41 +21,74 @@ export function StarBackground({numberOfOrdinaryStars=null, numberOfSpecialStars
 
     // const { height, width } = useWindowDimensions();
     const [ordinaryStars, setOrdinaryStars] = useState(ReactMutable.create(
-        (x) => setOrdinaryStars(x), []
+        (x) => setOrdinaryStars(x), {}
     ));
     const [specialStars, setSpecialStars] = useState(ReactMutable.create(
-        (x) => setSpecialStars(x), []
+        (x) => setSpecialStars(x), {}
     ));
-    generateTheStars();
+    generateOverallStars();
 
 
-    function generateTheStars() {
+    function generateOverallStars() {
         numberOfOrdinaryStars = numberOfOrdinaryStars ?? getRecommendedNumberOfOrdinaryStars();
 
-        const additionalSpecialStars = numberOfSpecialStars - specialStars.length;
-        for (let i = 0; i < additionalSpecialStars; i++) {
-            specialStars.push(getStar(100, 400));
-        }
-        if (additionalSpecialStars > 0)
-            specialStars.notifyMutation();
+        const additionalSpecialStars = numberOfSpecialStars - getNumberOfStars(specialStars.v);
+        generateStars(additionalSpecialStars, 100, 400, specialStars);
 
-        const additionalOrdinaryStars = numberOfOrdinaryStars - ordinaryStars.length;
-        for (let i = 0; i < additionalOrdinaryStars; i++) {
-            ordinaryStars.push(getStar(200, MAX_Z));
+        const additionalOrdinaryStars = numberOfOrdinaryStars - getNumberOfStars(ordinaryStars.v);
+        generateStars(additionalOrdinaryStars, 200, MAX_Z, ordinaryStars);
+        console.log("total number of stars: ", getNumberOfStars(specialStars.v) + getNumberOfStars(ordinaryStars.v));
+    }
+    function generateStars(additionalNumberOfStars, minZ, maxZ, array) {
+        for (let i = 0; i < additionalNumberOfStars; i++) {
+            const {z, element} = getStar(minZ, maxZ);
+            if (array[z] === undefined)
+                array[z] = [];
+            array[z].push(element);
         }
-        if (additionalOrdinaryStars > 0)
-            ordinaryStars.notifyMutation();
-
-        console.log("total number of stars: ", specialStars.length + ordinaryStars.length);
+        if (additionalNumberOfStars > 0)
+            array.notifyMutation();
     }
 
 
     return (<>
         <svg className="star-effect-svg scene">
-            {ordinaryStars.v}
-            {specialStars.v}
+            {unpackTheDictionaryOfStars(ordinaryStars.v)}
+            {unpackTheDictionaryOfStars(specialStars.v)}
         </svg>
     </>);
+}
+
+function getNumberOfStars(dictionary) {
+    const arrayOfLengths = Object.values(dictionary).map(arr => arr.length);
+    return sum(arrayOfLengths);
+}
+
+function unpackTheDictionaryOfStars(dictionary) {
+    const zValues = Object.keys(dictionary);
+
+    const ret = [];
+
+    for (const zValue of zValues) {
+        // for (const star of dictionary[zValue]) {
+        //     ret.push(star);
+        // }
+
+
+        const {dataDepth} = getDataDepth(zValue);
+        const elements = dictionary[zValue];
+        ret.push(<g className="inner-inner"> {/* responsible for star's rotation (orbit) */}
+
+            {/* responsible for star's position slightly to the right. combined to the
+                    rotation above, this will create circular-motion to the star. */}
+            <g className={'inner-3th'}
+               key={getStructuredId()}
+               style={{'--data-depth': dataDepth}}>
+                {elements}
+            </g>
+        </g>)
+    }
+    return ret;
 }
 
 
@@ -80,6 +114,12 @@ function getDocumentArea() {
 
 
 function getStar(minRandomZ, maxRandomZ) {
-    return <Star z={getRandomInt(minRandomZ, maxRandomZ)}
-                 key={getStructuredId()} />
+    let z = getRandomInt(minRandomZ, maxRandomZ);
+    z = roundToNearestNumber(z, 50);
+    // console.log('z', z)
+    return {
+        z,
+        'element': <Star z={z}
+                         key={getStructuredId()} />
+    }
 }

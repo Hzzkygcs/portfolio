@@ -18,6 +18,11 @@ export function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+export function roundToNearestNumber(toBeRounded, targetMultiplicity) {
+    const roundedUnscaledNumber = Math.round(toBeRounded / targetMultiplicity);
+    return roundedUnscaledNumber * targetMultiplicity;
+}
+
 
 export function gaussianRandom(mean=0, stdev=1) {
     // credit: https://stackoverflow.com/a/36481059/7069108
