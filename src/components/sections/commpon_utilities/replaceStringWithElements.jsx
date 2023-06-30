@@ -1,7 +1,10 @@
 import React from "react";
 
-export function replaceNewLineWithBrTag(sourceString) {
-    return replaceStringWithElement(sourceString, "\n", <br />);
+export function replaceNewLineWithBrTag(sourceString, brClass='') {
+    return replaceStringWithElement(sourceString, "\n", (<>
+        &nbsp;
+        <br className={brClass} />
+    </>));
 }
 
 export function replaceStringWithElement(sourceString, targetString, element) {

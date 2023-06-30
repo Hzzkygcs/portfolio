@@ -10,20 +10,33 @@
     --skill-thumbnail-box-size: 5rem;
 }
 
+
+@media (max-width: 425px) {
+    .br-skill-group{
+        /*display: none;*/
+    }
+    .skill-table{
+        grid-template-columns: fit-content(100%);
+    }
+    .skill-group-name > div{
+        min-height: 0;
+        text-align: center;
+    }
+    .skills-container {
+        justify-content: center;
+    }
+}
+
+
+
 .skill-table .skill-group-name{
     display: flex;
     align-items: start;
-}
-.skill-table .skill-group-name div{
-    margin: var(--skill-thumbnail-box-margin) 0;
-    min-height: var(--skill-thumbnail-box-size);
-    display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
 .skill-thumbnail-box{
     display: block;
-    cursor: pointer;
 
     margin: var(--skill-thumbnail-box-margin);
     border-radius: 100000000rem;
