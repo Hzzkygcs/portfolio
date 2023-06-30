@@ -19,47 +19,41 @@ export default function SkillsSection({rowPos}) {
 
             <div className="skill-table mt-5">
                 <SkillGroups title={'Programming\nLanguages'}>
+                    <Skills imgUrl="/img/skills/javascript.png"
+                            tooltipText="Javascript" />
                     <Skills imgUrl={'/img/skills/python.png'}
-                            tooltipText={'Python'}
-                            clickUrl={'https://python.org/'} />
+                            tooltipText={'Python'}/>
                     <Skills imgUrl="/img/skills/java.png"
-                            clickUrl="https://www.java.com/en/"
                             tooltipText="Java" />
                     <Skills imgUrl="/img/skills/c-sharp.png"
-                            clickUrl="https://learn.microsoft.com/en-us/dotnet/csharp/"
                             tooltipText="C Sharp" />
-                    <Skills imgUrl="/img/skills/javascript.png"
-                            clickUrl="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-                            tooltipText="Javascript" />
+
+                    <Skills imgUrl="/img/skills/dart.png"
+                            tooltipText="Dart" />
                     <Skills imgUrl="/img/skills/kotlin.png"
-                            clickUrl="https://kotlinlang.org/"
                             tooltipText="Kotlin" />
+
                 </SkillGroups>
                 <SkillGroups title={'Frameworks'}>
                     <Skills
                         imgUrl="/img/skills/node-js.png"
-                        clickUrl="https://nodejs.org/en/about/"
                         tooltipText="Node JS - Javascript" />
                     <Skills
                         imgUrl="/img/skills/django.svg"
-                        clickUrl="https://www.djangoproject.com/"
                         tooltipText="Django - Python" />
                     <Skills
                         imgUrl="/img/skills/spring-boot.svg"
-                        clickUrl="https://spring.io/projects/spring-boot"
                         tooltipText="Spring Boot - Java" />
                     <Skills
-                        imgUrl="/img/skills/react.png"
-                        clickUrl="https://react.dev/"
-                        tooltipText="React - NodeJs" />
+                        imgUrl="/img/skills/xamarin.png"
+                        tooltipText="Xamarin - C#" />
                     <Skills
                         imgUrl="/img/skills/flutter.png"
-                        clickUrl="https://flutter.dev/"
                         tooltipText="Flutter - Dart" />
-                    {/*<Skills*/}
-                    {/*    imgUrl="/img/skills/xamarin.png"*/}
-                    {/*    clickUrl="https://dotnet.microsoft.com/en-us/apps/xamarin"*/}
-                    {/*    tooltipText="Xamarin - C#" />*/}
+                    <Skills
+                        imgUrl="/img/skills/react.png"
+                        tooltipText="React - NodeJs" />
+
 
                 </SkillGroups>
                 {/*<SkillGroups title={'Other'}>*/}
