@@ -1,18 +1,13 @@
 import PropTypes from "prop-types";
+import {SectionContentContainer} from "../common/SectionContentContainer.jsx";
 
 const cvSectionPropTypes = {
     rowPos: PropTypes.number.isRequired,
 };
 export default function CvSection({rowPos,}) {
     return (<>
-        <div id="my-cv"
-             className="min-h-[15rem] content-section-container flex flex-col items-center justify-center"
-             style={{gridRow: rowPos}}>
-
-            <h1 className="text-4xl">
-                CV
-            </h1>
-
+        <SectionContentContainer elementId={'my-cv'} rowPos={rowPos} title={'CV'}
+                                 additionalClass={['min-h-[15rem]', 'justify-center']}>
             <a target="_blank"
                href="https://docs.google.com/document/d/1EZs_P-6ambL_914v7y9I08K3JlVgIRwz9Y5OWgO6MtM/edit?usp=sharing"
                className="inline-block m-10">
@@ -25,7 +20,7 @@ export default function CvSection({rowPos,}) {
                     </div>
                 </div>
             </a>
-        </div>
+        </SectionContentContainer>
     </>);
 }
 CvSection.propTypes = cvSectionPropTypes;

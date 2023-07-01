@@ -1,6 +1,7 @@
 import SkillGroups from "./components/SkillGroups.jsx";
 import Skills from "./components/Skills.jsx";
 import PropTypes from "prop-types";
+import {SectionContentContainer} from "../common/SectionContentContainer.jsx";
 
 const skillsSectionPropTypes = {
     rowPos: PropTypes.number.isRequired,
@@ -8,15 +9,8 @@ const skillsSectionPropTypes = {
 export default function SkillsSection({rowPos}) {
 
     return (<>
-        <div id="skills"
-             className="content-section-container flex flex-col items-center min-h-[20rem]"
-             style={{
-                 gridRow: rowPos
-             }}>
-            <h1 className="text-4xl">
-                Skills
-            </h1>
-
+        <SectionContentContainer elementId={'skills'} rowPos={rowPos}
+                                 additionalClass={['min-h-[20rem]']} title={'Skills'}>
             <div className="skill-table mt-5">
                 <SkillGroups title={'Programming\nLanguages'}>
                     <Skills imgUrl="/img/skills/javascript.png"
@@ -62,9 +56,8 @@ export default function SkillsSection({rowPos}) {
                 {/*        clickUrl="https://refactoring.guru/cert/r/MTMxODEx"*/}
                 {/*        tooltipText="Clean Code: Dive Into Refactoring - Refactoring Guru" />*/}
                 {/*</SkillGroups>*/}
-
             </div>
-        </div>
+        </SectionContentContainer>
     </>);
 }
 SkillsSection.propTypes = skillsSectionPropTypes;

@@ -1,16 +1,13 @@
 import PropTypes from "prop-types";
+import {SectionContentContainer} from "../common/SectionContentContainer.jsx";
 
 const aboutMeSectionPropTypes = {
     rowPos: PropTypes.number.isRequired,
 };
 export default function AboutMeSection({rowPos,}) {
     return (<>
-        <div className="content-section-container flex flex-col justify-center items-center min-h-screen"
-             style={{ gridRow: rowPos }}>
-            <h2 id="about-me"
-                className="text-4xl sm:text-5xl text-center inline-block">
-                About Me
-            </h2>
+        <SectionContentContainer elementId={'about-me'} rowPos={rowPos} title={'About Me'}
+                                 additionalClass={['justify-center min-h-screen']}>
             <div className="side-by-side-if-wide-enough">
                 <div className="flex justify-center items-center">
                     <img className="m-10
@@ -32,7 +29,7 @@ export default function AboutMeSection({rowPos,}) {
                     </p>
                 </div>
             </div>
-        </div>
+        </SectionContentContainer>
     </>);
 }
 AboutMeSection.propTypes = aboutMeSectionPropTypes;

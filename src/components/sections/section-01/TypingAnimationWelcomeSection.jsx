@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import {SectionContentContainer} from "../common/SectionContentContainer.jsx";
 
 const typingAnimationWelcomeSectionPropTypes = {
     rowPos: PropTypes.number.isRequired,
@@ -6,10 +7,8 @@ const typingAnimationWelcomeSectionPropTypes = {
 export default function TypingAnimationWelcomeSection({rowPos}) {
 
     return (<>
-        <div className="content-section-container first-section h-screen flex flex-col justify-center"
-             style={{
-                 gridRow: rowPos,
-             }}>
+        <SectionContentContainer elementId={'welcome'} rowPos={rowPos} title={null}
+                                 additionalClass={['first-section', 'h-screen', 'justify-center']}>
             <h1 className="text-6xl m-5 font-white text-center">
                 Hello!
             </h1>
@@ -37,7 +36,7 @@ export default function TypingAnimationWelcomeSection({rowPos}) {
                     </span>
                 </span>
             </div>
-        </div>
+        </SectionContentContainer>
     </>);
 }
 TypingAnimationWelcomeSection.propTypes = typingAnimationWelcomeSectionPropTypes;

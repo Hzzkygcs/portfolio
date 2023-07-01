@@ -5,6 +5,7 @@ import ExperienceBoxAndModal from "./components/ExperienceBoxAndModal.jsx";
 import {UniversitasIndonesia} from "./parts/UniversitasIndonesia.jsx";
 import {FexbFebUi} from "./parts/FexbFebUi.jsx";
 import {RistekExperience} from "./parts/RistekExperience.jsx";
+import {SectionContentContainer} from "../common/SectionContentContainer.jsx";
 
 const experienceSectionPropTypes = {
     rowPos: PropTypes.number.isRequired,
@@ -12,13 +13,7 @@ const experienceSectionPropTypes = {
 export default function ExperienceSection({rowPos}) {
 
     return (<>
-        <div id="experiences"
-             className="content-section-container flex flex-col items-center"
-             style={{gridRow: rowPos}}>
-            <h1 className="text-4xl">
-                Experiences
-            </h1>
-
+        <SectionContentContainer elementId={"experiences"} rowPos={rowPos} title={'Experiences'}>
             <ExperienceGroup experienceGroupName={'Work Experiences'}>
                 <ExperienceBoxAndModal img_src='/img/fexb.png'
                                        title='FExB FEB UI'
@@ -41,7 +36,7 @@ export default function ExperienceSection({rowPos}) {
                     <RistekExperience />
                 </ExperienceBoxAndModal>
             </ExperienceGroup>
-        </div>
+        </SectionContentContainer>
     </>);
 }
 ExperienceSection.propTypes = experienceSectionPropTypes;
