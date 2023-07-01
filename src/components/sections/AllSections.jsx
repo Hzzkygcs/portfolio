@@ -8,18 +8,19 @@ import {useEffect} from "react";
 
 const allSectionsPropTypes = {};
 export default function AllSections({}) {
+    let rowPos = 1;
 
     useEffect(function () {
         tippy('[data-tippy-content]');
     }, [])
 
     return (<>
-        <TypingAnimationWelcomeSection rowPos={1} />
-        <AboutMeSection rowPos={2} />
-        <CvSection rowPos={3} />
-        <ExperienceSection rowPos={4} />
-        <SkillsSection rowPos={5} />
-        <MyContactsSection rowPos={6} />
+        <TypingAnimationWelcomeSection rowPos={rowPos++} />
+        <AboutMeSection rowPos={rowPos++} />
+        <CvSection rowPos={rowPos++} />
+        <ExperienceSection rowPos={rowPos++} />
+        <SkillsSection rowPos={rowPos++} />
+        <MyContactsSection rowPos={rowPos++} />
     </>);
 }
 AllSections.propTypes = allSectionsPropTypes;
