@@ -8,18 +8,22 @@ function App() {
     const [componentMounted, setComponentMounted] = useState(false);
     useEffect(function () {
         setComponentMounted(true);
-    }, [])
+    }, []);
+
+    const [totalNumberOfSections, setTotalNumberOfSections] = useState(0);
+
 
   return (
     <>
       <div id="main-stack-layout"
            className="full-height"
            style={{
-               '--num-of-each-section': choosenGradientTheme.length,
+               '--num-of-each-section': totalNumberOfSections,
            }}>
 
-          <AllSections />
-          <GradientBackground colorsForEachSection={choosenGradientTheme} />
+          <AllSections totalNumberOfSections={totalNumberOfSections}
+                       setTotalNumberOfSections={setTotalNumberOfSections} />
+          <GradientBackground colorsForEachSection={choosenGradientTheme(totalNumberOfSections)} />
           {componentMounted && <StarBackground />}
       </div>
     </>

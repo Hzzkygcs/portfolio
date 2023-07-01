@@ -1,4 +1,3 @@
-
 /*
 Pendapat:
 Ridjky Tegar Perkasa:
@@ -32,40 +31,22 @@ Bisma:
     - kalau ga gradient 1 ya gradient 4
     - lebih prefer gradient 1 dibandingkan gradient 4
  */
+import {generateColorGradientAsHex} from "../core/colors/ColorGradient.js";
+
 export const gradients =  {
-    gradient1: [  // immanuel - 1.pdf
-        "#1C1F2F",
-        "#23273B",
-        "#282C42",
-        "#2C314A",
-        "#313652",
-    ],
-    gradient2: [  // immanuel - 2.pdf
-        "#192429",
-        "#1d292f",
-        "#212e36",
-        "#25343c",
-        "#293942",
-    ],
-    gradient3: [  // immanuel - 3.pdf
-        "#132020",
-        "#192929",
-        "#1f3233",
-        "#243b3d",
-        "#2a4546",
-    ],
-    gradient4: [  // Immanuel - 4.pdf
-        "#101323",
-        "#13162a",
-        "#15192d",
-        "#181c34",
-        "#1a1e38",
-        "#1d213f",
-    ],
+    gradient1:  // immanuel - 1.pdf
+        () => generateColorGradientAsHex([0x1C, 0x1F, 0x2F], [0x31, 0x36, 0x52], n),
+    gradient2:    // immanuel - 2.pdf
+        (n) => generateColorGradientAsHex([0x19, 0x24, 0x29], [0x29, 0x39, 0x42], n),
+    gradient3:  // immanuel - 3.pdf
+        (n) => generateColorGradientAsHex([0x13, 0x20, 0x20], [0x2a, 0x45, 0x46], n),
+    gradient4:   // Immanuel - 4.pdf
+        (n) => generateColorGradientAsHex(
+        [0x10, 0x13, 0x23], [0x1d, 0x21, 0x3f], n)
+    ,
 };
 export const choosenGradientTheme = gradients.gradient4;
 
 
 export const gradientSpreadPercentage = 10;
-export const fontFamily = ""; // null or a name of css
 

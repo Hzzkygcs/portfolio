@@ -5,23 +5,37 @@ import ExperienceSection from "./section-04/ExperienceSection.jsx";
 import SkillsSection from "./section-05/SkillsSection.jsx";
 import MyContactsSection from "./section-07/MyContactsSection.jsx";
 import {useEffect} from "react";
+import PropTypes from "prop-types";
 
-const allSectionsPropTypes = {};
-export default function AllSections({}) {
-    let rowPos = 1;
+const allSectionsPropTypes = {
+    totalNumberOfSections: PropTypes.number,
+    setTotalNumberOfSections: PropTypes.func,
+};
+export default function AllSections({totalNumberOfSections=null, setTotalNumberOfSections=null}) {
+    let currentNumberOfSections = 1;
 
     useEffect(function () {
         tippy('[data-tippy-content]');
     }, [])
 
-    return (<>
-        <TypingAnimationWelcomeSection rowPos={rowPos++} />
-        <AboutMeSection rowPos={rowPos++} />
-        <CvSection rowPos={rowPos++} />
-        <ExperienceSection rowPos={rowPos++} />
-        <SkillsSection rowPos={rowPos++} />
-        <MyContactsSection rowPos={rowPos++} />
+    const ret = (<>
+        <TypingAnimationWelcomeSection rowPos={currentNumberOfSections++} />
+        <AboutMeSection rowPos={currentNumberOfSections++} />
+        <CvSection rowPos={currentNumberOfSections++} />
+        <ExperienceSection rowPos={currentNumberOfSections++} />
+        <SkillsSection rowPos={currentNumberOfSections++} />
+        {/*<CertificatesSection rowPos={rowPos++} />*/}
+        <MyContactsSection rowPos={currentNumberOfSections++} />
     </>);
+
+    if (totalNumberOfSections == null)
+        return ret;
+    if (setTotalNumberOfSections == null)
+        return ret;
+    if (totalNumberOfSections === currentNumberOfSections)
+        return ret;
+    setTotalNumberOfSections(currentNumberOfSections);
+    return ret;
 }
 AllSections.propTypes = allSectionsPropTypes;
 

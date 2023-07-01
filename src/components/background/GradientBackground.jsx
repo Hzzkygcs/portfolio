@@ -9,7 +9,6 @@ const overallBackgroundPropTypes = {
     colorsForEachSection: PropTypes.array.isRequired,
 };
 export default function GradientBackground({colorsForEachSection,}) {
-
     const backgroundElements = [];
 
     for (var i=0; i < colorsForEachSection.length; i++){
@@ -40,8 +39,7 @@ export default function GradientBackground({colorsForEachSection,}) {
 
 
         backgroundElements.push(
-            <BackgroundElement className="section-gradient-effect col-start-1"
-                               key={i}
+            <BackgroundElement key={i} className="section-gradient-effect col-start-1"
                                style={{
                                    gridRow: i+1,
                                    background: backgroundCssCode,
