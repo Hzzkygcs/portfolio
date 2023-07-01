@@ -11,6 +11,7 @@ export default function MyContactsSection({rowPos,}) {
     return (<>
         <SectionContentContainer elementId={"connect-with-me"} rowPos={rowPos} title={"Reach Me"}
                                  additionalClass={['ending-section", "justify-start", "min-h-[50vh]']}>
+            <br />
             <EmailContact email={'immanuel.nuel02@gmail.com'} />
             <OtherContacts />
         </SectionContentContainer>
