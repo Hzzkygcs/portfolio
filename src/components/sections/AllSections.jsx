@@ -6,6 +6,7 @@ import SkillsSection from "./section-05/SkillsSection.jsx";
 import MyContactsSection from "./section-07/MyContactsSection.jsx";
 import {useEffect} from "react";
 import PropTypes from "prop-types";
+import {CertificatesSection} from "./section-06/CertificatesSection.jsx";
 
 const allSectionsPropTypes = {
     totalNumberOfSections: PropTypes.number,
@@ -24,7 +25,7 @@ export default function AllSections({totalNumberOfSections=null, setTotalNumberO
         <CvSection rowPos={currentNumberOfSections++} />
         <ExperienceSection rowPos={currentNumberOfSections++} />
         <SkillsSection rowPos={currentNumberOfSections++} />
-        {/*<CertificatesSection rowPos={rowPos++} />*/}
+        <CertificatesSection rowPos={currentNumberOfSections++} />
         <MyContactsSection rowPos={currentNumberOfSections++} />
     </>);
 
