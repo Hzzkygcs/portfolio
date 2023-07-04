@@ -8,7 +8,7 @@ export default function AboutMeSection({rowPos,}) {
     return (<>
         <SectionContentContainer elementId={'about-me'} rowPos={rowPos} title={'About Me'}
                                  additionalClass={['justify-center min-h-screen']}>
-            <div className="side-by-side-if-wide-enough">
+            <div className="side-by-side-if-wide-enough" style={{padding: "1rem"}}>
                 <div className="flex justify-center items-center">
                     <img className="m-10
                                 w-36 sm:w-48
@@ -22,8 +22,12 @@ export default function AboutMeSection({rowPos,}) {
                     <p className="m-3 max-w-3xl text-center md:text-justify">
                         Hello! I'm Immanuel, and you can call me Nuel. 😃
                         I'm a computer science student at Universitas Indonesia.
-                        I enjoy programming and creating software, especially ones that come from my ideas or ones
-                        that may solve problems around me. I'm currently looking for challenges!
+
+                        I've enjoyed programming since I was 13,
+                        especially ones that come from my ideas or ones
+                        that may solve problems around me.
+
+                        I'm currently looking for challenges!
                         So if you have any challenges for me in developing websites, mobile apps, or desktop apps,
                         please feel free to contact me! 😁
                     </p>
