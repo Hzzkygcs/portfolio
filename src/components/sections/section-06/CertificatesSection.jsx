@@ -58,17 +58,17 @@ export function CertificatesSection({rowPos,}) {
                         modules={[Autoplay, Pagination, Navigation, FreeMode, EffectCoverflow]}>
 
                     {getSwiperSlide(
-                        <Certificate name={'Clean Code: Dive Into Refactoring - Refactoring.Guru'}
+                        <Certificate name={'Clean Code: Dive Into Refactoring\nRefactoring.Guru'}
                                      clickUrl={'https://refactoring.guru/cert/r/MTMxODEx'}
                                      imageUrl={diveIntoRefactoring} />
                     )}
                     {getSwiperSlide(
-                        <Certificate name={'NodeJS & ExpressJS - CodeWithMosh.com'}
+                        <Certificate name={'NodeJS & ExpressJS\nCodeWithMosh.com'}
                                      clickUrl={'/certificates/certificate-of-completion-for-the-complete-node-js-course.pdf'}
                                      imageUrl={expressJsNodeJs} />
                     )}
                     {getSwiperSlide(
-                        <Certificate name={'Xamarin - Udemy.com'}
+                        <Certificate name={'Xamarin\nUdemy.com'}
                                      clickUrl={'https://www.udemy.com/certificate/UC-b231effe-8dc7-4b75-937b-188a4c54cd4e/'}
                                      imageUrl={xamarin} />
                     )}
